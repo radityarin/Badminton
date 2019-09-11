@@ -22,8 +22,9 @@
                 android:layout_marginTop="32dp"
                 android:text="Pesanan"
                 android:textColor="@android:color/black"
-                android:textSize="32dp"
-                android:textStyle="bold" />
+                android:textSize="32sp"
+                android:textStyle="bold"
+                tools:targetApi="o" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"

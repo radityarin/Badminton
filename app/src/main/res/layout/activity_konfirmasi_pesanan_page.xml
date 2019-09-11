@@ -12,17 +12,18 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_chevron_left_black_24dp"
-        android:backgroundTint="@android:color/black"/>
+        android:backgroundTint="@android:color/black" />
 
     <LinearLayout
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/backbutton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/backbutton"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:paddingBottom="24dp"
+        tools:targetApi="o">
 
         <TextView
             android:id="@+id/title"
@@ -31,7 +32,7 @@
             android:layout_marginTop="32dp"
             android:text="Review Reservasi"
             android:textColor="@android:color/black"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
@@ -76,30 +77,41 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/jamsewa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:id="@+id/jamsewa"
             android:text="09:00 - 10:00"
             android:textSize="20sp" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/llinputnolapangan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Masukan Nomor Lapangan"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:visibility="visible"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/inputnolapangan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Masukan Nomor Lapangan"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/inputnolapangan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nomor lapangan"/>
+        </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/llbuttonkonfirmasi"
         android:layout_width="match_parent"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
@@ -109,22 +121,38 @@
             android:id="@+id/unapprove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/buttonsolid4"
             android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonsolid4"
             android:text="Tidak tersedia"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:layout_weight="1" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/approve"
             android:layout_width="match_parent"
-            android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
             android:background="@drawable/buttonsolid3"
             android:text="Konfirmasi"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:layout_weight="1" />
+            android:textColor="@color/white" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/selesaibutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/buttonsolid3"
+        android:text="Selesai"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        tools:targetApi="o" />
 </RelativeLayout>

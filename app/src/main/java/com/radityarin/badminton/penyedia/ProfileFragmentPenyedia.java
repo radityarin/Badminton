@@ -41,11 +41,11 @@ public class ProfileFragmentPenyedia extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
-        final LinearLayout linearLayout_setting = (LinearLayout) view.findViewById(R.id.linearsettings);
+        final LinearLayout linearLayout_setting = view.findViewById(R.id.linearsettings);
 
-        TextView btnLogOut = (TextView) view.findViewById(R.id.btnLogOut);
+        TextView btnLogOut = view.findViewById(R.id.btnLogOut);
 
-        Button btnSetting = (Button) view.findViewById(R.id.buttonsetting);
+        Button btnSetting = view.findViewById(R.id.buttonsetting);
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,12 +60,12 @@ public class ProfileFragmentPenyedia extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Penyedia penyedia = dataSnapshot.getValue(Penyedia.class);
-                TextView nama = (TextView) view.findViewById(R.id.namapanti);
-                TextView kategori = (TextView) view.findViewById(R.id.kategori);
-                TextView email = (TextView) view.findViewById(R.id.emailpanti);
-                TextView alamat = (TextView) view.findViewById(R.id.alamatpanti);
-                TextView kordinat = (TextView) view.findViewById(R.id.kordinatpanti);
-                TextView notelepon = (TextView) view.findViewById(R.id.nopanti);
+                TextView nama = view.findViewById(R.id.namapanti);
+                TextView kategori = view.findViewById(R.id.kategori);
+                TextView email = view.findViewById(R.id.emailpanti);
+                TextView alamat = view.findViewById(R.id.alamatpanti);
+                TextView kordinat = view.findViewById(R.id.kordinatpanti);
+                TextView notelepon = view.findViewById(R.id.nopanti);
                 nama.setText(penyedia.getNamalapangan());
                 email.setText(penyedia.getEmaillapangan());
                 alamat.setText(penyedia.getAlamatlapangan());

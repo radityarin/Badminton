@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
                 listtempat.clear();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (!mLokasi.getFotolapangan().equals("")) {
+                    if (!mLokasi.getFotolapangan().equals("") && mLokasi.getActive()) {
                         listtempat.add(mLokasi);
                     }
                 }
@@ -74,10 +74,10 @@ public class HomeFragment extends Fragment {
                 Location loc = new Location("");
                 HashMap<Float, Penyedia> penyediaHashMap = new HashMap<>();
                 for (int i = 0; i < listtempat.size(); i++) {
-                    String latilang[] = listtempat.get(i).getKordinatlapangan().split(", ");
+                    String[] latilang = listtempat.get(i).getKordinatlapangan().split(", ");
                     loc.setLatitude(Double.parseDouble(latilang[0]));
                     loc.setLongitude(Double.parseDouble(latilang[1]));
-                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + String.valueOf(userlocation.distanceTo(loc)));
+                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
                     penyediaHashMap.put(userlocation.distanceTo(loc), listtempat.get(i));
                 }
 
@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
                     listtempat.add(penyediaHashMap.get(key));
                 }
                 for (int i = 0; i < listtempat.size(); i++) {
-                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + String.valueOf(userlocation.distanceTo(loc)));
+                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
                 }
                 RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lokasi);
                 recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
@@ -120,10 +120,10 @@ public class HomeFragment extends Fragment {
                         Location loc = new Location("");
                         HashMap<Float, Penyedia> penyediaHashMap = new HashMap<>();
                         for (int i = 0; i < listtempat.size(); i++) {
-                            String latilang[] = listtempat.get(i).getKordinatlapangan().split(", ");
+                            String[] latilang = listtempat.get(i).getKordinatlapangan().split(", ");
                             loc.setLatitude(Double.parseDouble(latilang[0]));
                             loc.setLongitude(Double.parseDouble(latilang[1]));
-                            Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + String.valueOf(userlocation.distanceTo(loc)));
+                            Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
                             penyediaHashMap.put(userlocation.distanceTo(loc), listtempat.get(i));
                         }
 
@@ -134,7 +134,7 @@ public class HomeFragment extends Fragment {
                             listtempat.add(penyediaHashMap.get(key));
                         }
                         for (int i = 0; i < listtempat.size(); i++) {
-                            Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + String.valueOf(userlocation.distanceTo(loc)));
+                            Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
                         }
                         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lokasi);
                         recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
@@ -177,7 +177,7 @@ public class HomeFragment extends Fragment {
                     kordinatuser = location.getLatitude() + ", " + location.getLongitude();
 //                    // Display in Toast
                     userlocation = new Location("");
-                    String latlang[] = kordinatuser.split(", ");
+                    String[] latlang = kordinatuser.split(", ");
                     userlocation.setLatitude(Double.parseDouble(latlang[0]));
                     userlocation.setLongitude(Double.parseDouble(latlang[1]));
 //                    Toast.makeText(getContext(),

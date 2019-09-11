@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="158dp"
     android:layout_marginVertical="12dp"
     android:elevation="0dp"
     android:orientation="vertical"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    tools:targetApi="o">
 
     <LinearLayout
         android:layout_marginHorizontal="8dp"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:targetApi="o">
 
         <ImageView
             android:id="@+id/fotoPanti"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/pantiasuhan02" />
+            android:src="@drawable/pantiasuhan02"
+            android:contentDescription="TODO" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="16dp"
+                tools:targetApi="o">
 
                 <TextView
                     android:id="@+id/namapanti"
@@ -38,7 +43,7 @@
                     android:layout_height="50dp"
                     android:textColor="@android:color/black"
                     android:text="Panti Asuhan Sunan Giri"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:gravity="center_vertical"
                     android:textStyle="bold" />
 

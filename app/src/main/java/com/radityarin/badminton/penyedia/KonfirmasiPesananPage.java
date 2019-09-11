@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,13 +28,41 @@ public class KonfirmasiPesananPage extends AppCompatActivity {
     private Sewa sewa;
     private TextView tvnamapenyewa,tvtanggalsewa,tvjamsewa;
     private EditText edtnolapangan;
+    private String cek;
+    private LinearLayout llinputnolapangan,llbuttonkonfirmasi;
+    private Button selesai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_konfirmasi_pesanan_page);
 
+        llinputnolapangan = findViewById(R.id.llinputnolapangan);
+        llbuttonkonfirmasi = findViewById(R.id.llbuttonkonfirmasi);
+        selesai = findViewById(R.id.selesaibutton);
+
         sewa = getIntent().getParcelableExtra("sewa");
+
+        cek = getIntent().getStringExtra("konfirmasi");
+
+        if(cek.equalsIgnoreCase("Pesanan dikonfirmasi")){
+            llinputnolapangan.setVisibility(View.INVISIBLE);
+            llbuttonkonfirmasi.setVisibility(View.INVISIBLE);
+            selesai.setVisibility(View.VISIBLE);
+        }
+
+        selesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference myref = database.getReference().child("Detail Sewa");
+                myref.child(sewa.getIdsewa()).child("statussewa").setValue("Pesanan selesai");
+                Intent intent = new Intent(KonfirmasiPesananPage.this,MainPenyediaActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         tvnamapenyewa = findViewById(R.id.namapenyewa);
         tvnamapenyewa.setText(sewa.getNamapenyewa());
@@ -47,41 +76,19 @@ public class KonfirmasiPesananPage extends AppCompatActivity {
         btnkonfirmasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String nolapangan = edtnolapangan.getText().toString();
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference myref = database.getReference().child("Detail Sewa");
-                Query query = myref.orderByChild("idlapangan").equalTo(auth.getUid());
-                query.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        myref.child(dataSnapshot.getKey()).child("statussewa").setValue("Pesanan dikonfirmasi");
-                        myref.child(dataSnapshot.getKey()).child("nomorlapangan").setValue(nolapangan);
-                        Intent intent = new Intent(KonfirmasiPesananPage.this,MainPenyediaActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                if (edtnolapangan.getText().toString().trim().equalsIgnoreCase("")) {
+                    edtnolapangan.setError("Isi nomor lapangan");
+                } else {
+                    final String nolapangan = edtnolapangan.getText().toString();
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference myref = database.getReference().child("Detail Sewa");
+                    myref.child(sewa.getIdsewa()).child("statussewa").setValue("Pesanan dikonfirmasi");
+                    myref.child(sewa.getIdsewa()).child("nomorlapangan").setValue(nolapangan);
+                    Intent intent = new Intent(KonfirmasiPesananPage.this, MainPenyediaActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -92,36 +99,10 @@ public class KonfirmasiPesananPage extends AppCompatActivity {
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final DatabaseReference myref = database.getReference().child("Detail Sewa");
-                Query query = myref.orderByChild("idlapangan").equalTo(auth.getUid());
-                query.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        myref.child(dataSnapshot.getKey()).child("statussewa").setValue("Lapangan tidak tersedia");
-                        Intent intent = new Intent(KonfirmasiPesananPage.this,MainPenyediaActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                myref.child(sewa.getIdsewa()).child("statussewa").setValue("Jam tidak tersedia");
+                Intent intent = new Intent(KonfirmasiPesananPage.this,MainPenyediaActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

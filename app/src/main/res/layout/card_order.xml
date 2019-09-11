@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:orientation="horizontal"
-    android:paddingHorizontal="16dp">
+    android:paddingHorizontal="16dp"
+    tools:targetApi="o">
 
     <ImageView
         android:id="@+id/logokategori"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/pesanlogo" />
+        android:src="@drawable/pesanlogo"
+        android:contentDescription="TODO" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        tools:targetApi="o">
 
         <TextView
             android:id="@+id/namalapangansewa"
@@ -25,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="Lapangan A"
             android:textColor="@color/colorPrimary"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView

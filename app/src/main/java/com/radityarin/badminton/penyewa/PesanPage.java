@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.DatePickerFragment;
 import com.radityarin.badminton.LandingPage;
 import com.radityarin.badminton.R;
+import com.radityarin.badminton.penyedia.KonfirmasiPesananPage;
 import com.radityarin.badminton.penyedia.MainPenyediaActivity;
 import com.radityarin.badminton.penyedia.SignUpPenyediaPage;
 import com.radityarin.badminton.pojo.Penyedia;
@@ -121,10 +122,10 @@ public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnD
             @Override
             public void onClick(View v) {
                 if (!jammulai.equals("") && !jamselesai.equals("") && !tanggal.equals("")) {
-                    DatabaseReference myRef = database.getReference("Detail Sewa").child(String.valueOf(++child));
-                    Sewa sewa = new Sewa(penyedia.getIdlapangan(), penyedia.getNamalapangan(), "", tanggal, jammulai + " - " + jamselesai, auth.getUid(), profil.getNamaUser(), "Belum di Konfirmasi");
+                    DatabaseReference myRef = database.getReference("Detail Sewa").child(String.valueOf(child+1));
+                    Sewa sewa = new Sewa(penyedia.getIdlapangan(), penyedia.getNamalapangan(), "", tanggal, jammulai + " - " + jamselesai, auth.getUid(), profil.getNamaUser(), "Belum dikonfirmasi",String.valueOf(child+1));
                     myRef.setValue(sewa);
-                    Intent intent = new Intent(PesanPage.this, MainActivity.class);
+                    Intent intent = new Intent(PesanPage.this, KonfirmasiPage.class);
                     startActivity(intent);
                     finish();
                 }

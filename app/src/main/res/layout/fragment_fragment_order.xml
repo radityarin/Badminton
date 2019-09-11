@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:paddingBottom="24dp">
@@ -26,8 +26,9 @@
             android:layout_marginTop="32dp"
             android:text="Reservasi"
             android:textColor="@android:color/black"
-            android:textSize="32dp"
-            android:textStyle="bold" />
+            android:textSize="32sp"
+            android:textStyle="bold"
+            tools:targetApi="o" />
 
 
         <androidx.recyclerview.widget.RecyclerView

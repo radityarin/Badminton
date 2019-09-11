@@ -99,7 +99,7 @@ public class SignUpPenyediaPage extends AppCompatActivity {
                     List<Address> list = gc.getFromLocationName(alamat, 1);
                     Address add = list.get(0);
                     String locality = add.getLocality();
-                    kordinat = String.valueOf(add.getLatitude()+", "+add.getLongitude());
+                    kordinat = add.getLatitude() + ", " + add.getLongitude();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

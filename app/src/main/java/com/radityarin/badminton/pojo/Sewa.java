@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 public class Sewa implements Parcelable {
 
-    private String idlapangan, namalapangan, nomorlapangan, tglsewa, jamsewa, idpenyewa, namapenyewa, statussewa;
+    private String idlapangan, namalapangan, nomorlapangan, tglsewa, jamsewa, idpenyewa, namapenyewa, statussewa, idsewa;
 
     public Sewa() {
 
     }
 
-    public Sewa(String idlapangan, String namalapangan, String nomorlapangan, String tglsewa, String jamsewa, String idpenyewa, String namapenyewa, String statussewa) {
+    public Sewa(String idlapangan, String namalapangan, String nomorlapangan, String tglsewa, String jamsewa, String idpenyewa, String namapenyewa, String statussewa, String idsewa) {
         this.idlapangan = idlapangan;
         this.namalapangan = namalapangan;
         this.nomorlapangan = nomorlapangan;
@@ -20,6 +20,7 @@ public class Sewa implements Parcelable {
         this.idpenyewa = idpenyewa;
         this.namapenyewa = namapenyewa;
         this.statussewa = statussewa;
+        this.idsewa = idsewa;
     }
 
     public String getIdlapangan() {
@@ -86,6 +87,14 @@ public class Sewa implements Parcelable {
         this.statussewa = statussewa;
     }
 
+    public String getIdsewa() {
+        return idsewa;
+    }
+
+    public void setIdsewa(String idsewa) {
+        this.idsewa = idsewa;
+    }
+
 
     @Override
     public int describeContents() {
@@ -102,6 +111,7 @@ public class Sewa implements Parcelable {
         dest.writeString(this.idpenyewa);
         dest.writeString(this.namapenyewa);
         dest.writeString(this.statussewa);
+        dest.writeString(this.idsewa);
     }
 
     protected Sewa(Parcel in) {
@@ -113,6 +123,7 @@ public class Sewa implements Parcelable {
         this.idpenyewa = in.readString();
         this.namapenyewa = in.readString();
         this.statussewa = in.readString();
+        this.idsewa = in.readString();
     }
 
     public static final Creator<Sewa> CREATOR = new Creator<Sewa>() {

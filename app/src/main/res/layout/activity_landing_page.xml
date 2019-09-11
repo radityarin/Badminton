@@ -11,11 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/badminbg"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="TODO" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bgdarker"/>
+        android:src="@drawable/bgdarker"
+        android:contentDescription="TODO" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,7 +33,7 @@
             android:textAlignment="center"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:textSize="50dp" />
+            android:textSize="50sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -40,7 +42,7 @@
             android:text="Membantu mencari dan memesan\nLapangan Badminton di sekitar anda"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -49,7 +51,8 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        tools:targetApi="o">
 
         <Button
             android:id="@+id/buttonmasuk"
@@ -61,8 +64,9 @@
             android:text="Masuk"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:targetApi="o" />
 
         <Button
             android:id="@+id/buttondaftar"
@@ -76,7 +80,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textAllCaps="false"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
 
@@ -87,7 +91,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:targetApi="o">
 
             <TextView
                 android:layout_gravity="center_vertical"
@@ -125,7 +130,7 @@
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             android:layout_marginBottom="32dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
         <!---->
         <!--<TextView-->

@@ -1,9 +1,13 @@
 package com.radityarin.badminton.penyewa;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +16,25 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.R;
+import com.radityarin.badminton.adapter.AdapterOrder;
+import com.radityarin.badminton.adapter.AdapterPenyedia;
 import com.radityarin.badminton.pojo.Sewa;
+
+import java.util.ArrayList;
 
 
 public class OrderFragment extends Fragment {
 
-    FirebaseRecyclerAdapter<Sewa, OrderFragment.DonasiViewHolder> sewaAdapter;
-    DatabaseReference sewaRef;
-    FirebaseAuth auth;
+    private ArrayList<Sewa> listsewa;
+    private DatabaseReference sewaRef;
+    private FirebaseAuth auth;
 
     public OrderFragment() {
     }
@@ -35,70 +46,34 @@ public class OrderFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_history, container, false);
 
         auth = FirebaseAuth.getInstance();
+        listsewa = new ArrayList<>();
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         sewaRef = FirebaseDatabase.getInstance().getReference().child("Detail Sewa");
-        Query query = sewaRef.orderByChild("idpenyewa").equalTo(auth.getUid());
-        FirebaseRecyclerOptions<Sewa> options =
-                new FirebaseRecyclerOptions.Builder<Sewa>()
-                        .setQuery(query, Sewa.class)
-                        .build();
-
-        sewaAdapter = new FirebaseRecyclerAdapter<Sewa, OrderFragment.DonasiViewHolder>(options) {
+        sewaRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public OrderFragment.DonasiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                // Create a new instance of the ViewHolder, in this case we are using a custom
-                // layout called R.layout.message for each item
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.card_order, parent, false);
-
-                return new DonasiViewHolder(view);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listsewa.clear();
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    Sewa mSewa = dt.getValue(Sewa.class);
+                    Log.d("cek",mSewa.getStatussewa());
+                    if (mSewa.getIdpenyewa().equals(auth.getUid()) && (mSewa.getStatussewa().equalsIgnoreCase("Belum dikonfirmasi") || mSewa.getStatussewa().equalsIgnoreCase("Pesanan dikonfirmasi"))) {
+                        listsewa.add(mSewa);
+                    }
+                }
+                recyclerView.setAdapter(new AdapterOrder(listsewa, getContext(),false));
             }
 
             @Override
-            protected void onBindViewHolder(OrderFragment.DonasiViewHolder holder, int position, final Sewa model) {
-                    holder.display(model.getNamalapangan(),model.getTglsewa(),model.getJamsewa(),model.getStatussewa());
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
-        };
-        recyclerView.setAdapter(sewaAdapter);
+        });
         return view;
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        sewaAdapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        sewaAdapter.stopListening();
-    }
-
-    public class DonasiViewHolder extends RecyclerView.ViewHolder {
-
-        View view;
-
-        public DonasiViewHolder(View itemView) {
-            super(itemView);
-            view = itemView;
-        }
-
-        public void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa){
-            TextView tvnamalapangan = view.findViewById(R.id.namalapangansewa);
-            tvnamalapangan.setText(lapangansewa);
-            TextView tvtanggalsewa = view.findViewById(R.id.tanggalsewa);
-            tvtanggalsewa.setText(tanggalsewa);
-            TextView tvjamsewa = view.findViewById(R.id.jamsewa);
-            tvjamsewa.setText(jamsewa);
-            TextView tvstatussewa = view.findViewById(R.id.statussewa);
-            tvstatussewa.setText(statussewa);
-        }
-
     }
 
 }

@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.R;
-import com.radityarin.badminton.penyewa.ListPerKategoriPage;
 import com.radityarin.badminton.penyewa.PesanPage;
 import com.radityarin.badminton.penyewa.TempatPage;
 import com.radityarin.badminton.pojo.Penyedia;
@@ -73,8 +72,8 @@ public class TempatPageAdmin extends AppCompatActivity {
                     myref.child(penyedia.getIdlapangan()).child("active").setValue(true);
                 }
                 Intent intent = new Intent(TempatPageAdmin.this, MainAdminActivity.class);
-                intent.putExtra("penyedia", penyedia);
                 startActivity(intent);
+                finish();
             }
         });
 

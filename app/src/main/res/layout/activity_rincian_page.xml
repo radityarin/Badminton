@@ -20,7 +20,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/ic_chevron_left_black_24dp"
-            android:backgroundTint="@color/colorPrimary" />
+            android:backgroundTint="@color/colorPrimary"
+            tools:targetApi="o" />
 
         <TextView
             android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:gravity="center_vertical"
             android:text="Rincian Barang Donasi"
             android:textColor="@color/colorPrimary"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
     </LinearLayout>
 
@@ -40,20 +41,22 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_add_a_photo_black_24dp" />
+        android:src="@drawable/ic_add_a_photo_black_24dp"
+        android:contentDescription="TODO" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        tools:targetApi="o">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Detail penyumbang"
             android:textColor="@color/colorPrimary"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -106,7 +109,7 @@
             android:layout_marginTop="8dp"
             android:text="Tujuan Donasi yang terpilih"
             android:textColor="@color/colorPrimary"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -159,7 +162,7 @@
             android:layout_marginTop="8dp"
             android:text="Tentukan tanggal donasi"
             android:textColor="@color/colorPrimary"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <Button
@@ -190,6 +193,7 @@
         android:text="Konfirmasi"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="24dp" />
+        android:textSize="24sp"
+        tools:targetApi="o" />
 
 </LinearLayout>

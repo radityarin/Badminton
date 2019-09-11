@@ -11,9 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/splashscreen" />
+        app:srcCompat="@drawable/splashscreen"
+        android:contentDescription="TODO" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bgdarker"/>
+        android:src="@drawable/bgdarker"
+        android:contentDescription="TODO" />
 </RelativeLayout>

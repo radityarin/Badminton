@@ -2,6 +2,8 @@ package com.radityarin.badminton.penyedia;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,19 +17,22 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.R;
+import com.radityarin.badminton.adapter.AdapterOrder;
 import com.radityarin.badminton.penyewa.OrderFragment;
 import com.radityarin.badminton.pojo.Sewa;
 
 import java.util.ArrayList;
 
 public class OrderFragmentPenyedia extends Fragment {
-    FirebaseAuth auth;
-    FirebaseRecyclerAdapter<Sewa, OrderFragmentPenyedia.DonasiViewHolder> sewaAdapter;
+    private ArrayList<Sewa> listsewa;
+    private DatabaseReference sewaRef;
+    private FirebaseAuth auth;
 
     public OrderFragmentPenyedia() {
         // Required empty public constructor
@@ -39,81 +44,32 @@ public class OrderFragmentPenyedia extends Fragment {
         final View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_fragment_order, parent, false);
         auth = FirebaseAuth.getInstance();
+        listsewa = new ArrayList<>();
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        final ArrayList<Sewa> listnotifikasi =new ArrayList<>();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference sewaRef = database.getReference().child("Detail Sewa");
-        Query query = sewaRef.orderByChild("idlapangan").equalTo(auth.getUid());
-
-        FirebaseRecyclerOptions<Sewa> options =
-                new FirebaseRecyclerOptions.Builder<Sewa>()
-                        .setQuery(query, Sewa.class)
-                        .build();
-
-        sewaAdapter = new FirebaseRecyclerAdapter<Sewa, OrderFragmentPenyedia.DonasiViewHolder>(options) {
+        sewaRef = FirebaseDatabase.getInstance().getReference().child("Detail Sewa");
+        sewaRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public OrderFragmentPenyedia.DonasiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                // Create a new instance of the ViewHolder, in this case we are using a custom
-                // layout called R.layout.message for each item
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.card_order, parent, false);
-
-                return new OrderFragmentPenyedia.DonasiViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(OrderFragmentPenyedia.DonasiViewHolder holder, int position, final Sewa model) {
-                holder.display(model.getNamalapangan(),model.getTglsewa(),model.getJamsewa(),model.getStatussewa());
-                holder.view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getContext(),KonfirmasiPesananPage.class);
-                        intent.putExtra("sewa",model);
-                        startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listsewa.clear();
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    Sewa mSewa = dt.getValue(Sewa.class);
+                    if (mSewa.getIdlapangan().equals(auth.getUid()) && (mSewa.getStatussewa().equalsIgnoreCase("Belum dikonfirmasi") || mSewa.getStatussewa().equalsIgnoreCase("Pesanan dikonfirmasi"))) {
+                        listsewa.add(mSewa);
                     }
-                });
+                }
+                recyclerView.setAdapter(new AdapterOrder(listsewa, getContext(),true));
             }
-        };
-        recyclerView.setAdapter(sewaAdapter);
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         return view;
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        sewaAdapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        sewaAdapter.stopListening();
-    }
-
-    public class DonasiViewHolder extends RecyclerView.ViewHolder {
-
-        View view;
-
-        public DonasiViewHolder(View itemView) {
-            super(itemView);
-            view = itemView;
-        }
-
-        public void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa){
-            TextView tvnamalapangan = view.findViewById(R.id.namalapangansewa);
-            tvnamalapangan.setText(lapangansewa);
-            TextView tvtanggalsewa = view.findViewById(R.id.tanggalsewa);
-            tvtanggalsewa.setText(tanggalsewa);
-            TextView tvjamsewa = view.findViewById(R.id.jamsewa);
-            tvjamsewa.setText(jamsewa);
-            TextView tvstatussewa = view.findViewById(R.id.statussewa);
-            tvstatussewa.setText(statussewa);
-        }
-
-    }
-
 }

@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:paddingBottom="24dp">
@@ -22,7 +22,8 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:targetApi="o">
 
                 <TextView
                     android:id="@+id/title"
@@ -30,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:text="Beranda"
                     android:textColor="@android:color/black"
-                    android:textSize="32dp"
+                    android:textSize="32sp"
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold" />
 
@@ -52,7 +53,8 @@
                 android:background="@drawable/bg_searchview"
                 android:iconifiedByDefault="false"
                 android:queryBackground="@android:color/transparent"
-                android:queryHint="Search here" />
+                android:queryHint="Search here"
+                tools:targetApi="o" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_lokasi"
