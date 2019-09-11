@@ -12,7 +12,7 @@
         android:id="@+id/historybutton"
         android:enabled="true"
         android:icon="@drawable/ic_history_black_24dp"
-        android:title="Akun"
+        android:title="Riwayat"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/profilebutton"

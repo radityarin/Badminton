@@ -73,7 +73,9 @@ public class HistoryFragmentPenyedia extends Fragment {
 
             @Override
             protected void onBindViewHolder(HistoryFragmentPenyedia.DonasiViewHolder holder, int position, final Sewa model) {
-                holder.display(model.getNamalapangan(),model.getTglsewa(),model.getJamsewa(),model.getStatussewa());
+                if (!model.getStatussewa().equals("Belum dikonfirmasi")) {
+                    holder.display(model.getNamalapangan(), model.getTglsewa(), model.getJamsewa(), model.getStatussewa());
+                }
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

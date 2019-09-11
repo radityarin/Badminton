@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".penyedia.KonfirmasiPesananPage"></activity>
+        <activity android:name=".admin.TempatPageAdmin"></activity>
+        <activity android:name=".penyedia.KonfirmasiPesananPage" />
         <activity android:name=".admin.MainAdminActivity" />
         <activity android:name=".penyedia.SignUp2PenyediaPage" />
         <!--
