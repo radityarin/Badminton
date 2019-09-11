@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    tools:context=".penyewa.KonfirmasiPage">
+
+    <ImageView
+        android:id="@+id/gambar"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/berhasil" />
+
+    <TextView
+        android:layout_below="@id/gambar"
+        android:id="@+id/statustitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Donasi barang diproses"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/llantar"
+        android:layout_below="@id/statustitle"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Silahkan antar barang donasi anda ke alamat berikut"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/alamattempat"
+            android:textAlignment="center"
+            android:layout_marginTop="32dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jl Sumbersari no 20 Malang, Jawa Timur"/>
+
+        <Button
+            android:layout_marginTop="48dp"
+            android:background="@drawable/buttonborder"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Navigasi ke Lokasi"
+            android:textAllCaps="false"
+            android:textSize="24dp"
+            android:layout_marginBottom="16dp"
+            android:id="@+id/test"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lljemput"
+        android:visibility="invisible"
+        android:layout_below="@id/statustitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Berikut estimasi jadwal penjemputan"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Jadwal penjemputan barang"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tanggalpenjemputan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sabtu, 27 April 2019" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="15:00 - 17:00" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nama penjemput barang"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Irfan Maulana Akbar" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/selesaibutton"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="96dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/buttonsolid"
+        android:text="Selesai"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
+</RelativeLayout>

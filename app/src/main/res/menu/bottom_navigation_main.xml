@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homebutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_grey_24dp"
+        android:title="Beranda"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/orderbutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        android:title="Pesanan"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/historybutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="Riwayat"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/profilebutton"
+        android:enabled="true"
+        android:icon="@drawable/ic_person_grey_24dp"
+        android:title="Akun"
+        app:showAsAction="ifRoom"/>
+</menu>

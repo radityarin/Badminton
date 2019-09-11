@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".penyedia.SignUp2PenyediaPage">
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_chevron_left_black_24dp" />
+
+    <LinearLayout
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Lengkapi Data"
+            android:textColor="@color/colorAccent"
+            android:textSize="32dp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/uploadfotolapangan"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_add_a_photo_black_24dp"/>
+
+        <EditText
+            android:id="@+id/jumlahlapangan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:hint="Jumlah lapangan"
+            android:inputType="number"
+            android:paddingHorizontal="16dp" />
+
+        <EditText
+            android:id="@+id/hargalapangan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:hint="Harga sewa per jam"
+            android:inputType="number"
+            android:paddingHorizontal="16dp" />
+
+        <Spinner
+            android:id="@+id/jambuka"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:paddingHorizontal="8dp" />
+
+        <Spinner
+            android:id="@+id/jamtutup"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:paddingHorizontal="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttondaftarpenyedia2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/buttonborder"
+            android:text="Konfirmasi"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="24dp" />
+    </LinearLayout>
+</RelativeLayout>

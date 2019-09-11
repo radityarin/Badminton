@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".penyedia.SignUpPenyediaPage">
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_chevron_left_black_24dp" />
+
+    <LinearLayout
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="Daftar Lapangan"
+            android:textColor="@color/colorAccent"
+            android:textSize="32dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/emaillapangan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/buttonborder"
+            android:hint="Email"
+            android:paddingHorizontal="16dp" />
+
+        <EditText
+            android:id="@+id/namalapangan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:hint="Nama Lapangan"
+            android:paddingHorizontal="16dp" />
+
+        <EditText
+            android:id="@+id/alamatlapangan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:hint="Alamat lapangan"
+            android:paddingHorizontal="16dp" />
+
+        <EditText
+            android:id="@+id/noteleponlapangan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:hint="Nomor telepon"
+            android:paddingHorizontal="16dp" />
+
+        <EditText
+            android:id="@+id/passwordlapangan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/buttonborder"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttondaftarpenyedia"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonborder"
+            android:text="Daftar"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Transparent"
+            android:text="Sudah memiliki akun? Login disini"
+            android:textAllCaps="false"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="16dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>

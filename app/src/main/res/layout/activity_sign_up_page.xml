@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".penyewa.SignUpPage">
+
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_chevron_left_black_24dp"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:text="Daftar"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/nama"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/buttonborder"
+                android:hint="Nama"
+                android:paddingHorizontal="16dp" />
+
+            <EditText
+                android:layout_marginTop="16dp"
+                android:id="@+id/noHp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/buttonborder"
+                android:hint="No HP"
+                android:paddingHorizontal="16dp" />
+
+            <EditText
+                android:layout_marginTop="16dp"
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/buttonborder"
+                android:hint="Email"
+                android:paddingHorizontal="16dp" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/buttonborder"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttondaftar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/buttonborder"
+                android:text="Daftar"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24dp" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonlogin"
+                android:layout_marginBottom="16dp"
+                android:background="@color/Transparent"
+                android:text="Sudah memiliki akun? Login disini"
+                android:textAllCaps="false"
+                android:textColor="@color/PrimaryText"
+                android:textSize="16dp" />
+        </LinearLayout>
+</RelativeLayout>

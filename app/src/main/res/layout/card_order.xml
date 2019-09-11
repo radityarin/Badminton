@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp">
+
+    <ImageView
+        android:id="@+id/logokategori"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/pesanlogo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/namalapangansewa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lapangan A"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tanggalsewa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sabtu, 27 April 2019" />
+
+        <TextView
+            android:id="@+id/jamsewa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12:00 - 13:00" />
+
+        <TextView
+            android:id="@+id/statussewa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proses penjemputan"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold
+" />
+    </LinearLayout>
+</LinearLayout>
