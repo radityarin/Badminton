@@ -5,24 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".admin.ActiveFragment">
-    
-    <TextView
-        android:id="@+id/judul"
-        android:layout_width="wrap_content"
-        android:text="Penyedia Aktif"
-        android:layout_marginHorizontal="16dp"
-        android:textSize="32sp"
-        android:layout_marginTop="32dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_height="wrap_content"
-        tools:targetApi="o" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/judul"
-        android:id="@+id/recycler_view"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
+
+
+            <TextView
+                android:id="@+id/judul"
+                android:layout_marginTop="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Penyedia Aktif"
+                android:textColor="@android:color/black"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                tools:targetApi="o" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
