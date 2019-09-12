@@ -13,10 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,24 +23,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.DatePickerFragment;
-import com.radityarin.badminton.LandingPage;
 import com.radityarin.badminton.R;
-import com.radityarin.badminton.penyedia.KonfirmasiPesananPage;
-import com.radityarin.badminton.penyedia.MainPenyediaActivity;
-import com.radityarin.badminton.penyedia.SignUpPenyediaPage;
 import com.radityarin.badminton.pojo.Penyedia;
 import com.radityarin.badminton.pojo.Profil;
 import com.radityarin.badminton.pojo.Sewa;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private Penyedia penyedia;
     private String jammulai, jamselesai, tanggal;
     private TextView tvtanggal;
-    private Button btnpesan;
     private FirebaseAuth auth;
     private Profil profil;
     private int child;
@@ -83,7 +77,7 @@ public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnD
         final Spinner spn_jambuka = findViewById(R.id.jammulai);
         Spinner spn_jamtutup = findViewById(R.id.jamselesai);
         String[] jambukaarray = getResources().getStringArray(R.array.jammulai);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(
                 this, R.layout.spinner_item, jambukaarray
         );
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
@@ -101,7 +95,7 @@ public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnD
         });
 
         String[] jamtutuparray = getResources().getStringArray(R.array.jamselesai);
-        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(
+        ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<>(
                 this, R.layout.spinner_item, jamtutuparray
         );
         spn_jamtutup.setAdapter(spinnerArrayAdapter2);
@@ -117,7 +111,7 @@ public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnD
             }
         });
 
-        btnpesan = findViewById(R.id.btnpesan);
+        Button btnpesan = findViewById(R.id.btnpesan);
         btnpesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,8 +133,7 @@ public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnD
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-        tanggal = currentDateString;
+        tanggal = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
         tvtanggal.setText(tanggal);
     }
 
@@ -150,20 +143,17 @@ public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnD
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-//                 value = dataSnapshot.getValue(String.class);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Profil mProfil = dt.getValue(Profil.class);
-                    if (mProfil.getUserId().equals(auth.getUid())) {
+                    if (Objects.requireNonNull(mProfil).getUserId().equals(auth.getUid())) {
                         profil = mProfil;
                     }
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
             }
         });

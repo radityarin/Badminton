@@ -23,21 +23,21 @@ import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.LandingPage;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.pojo.Penyedia;
+import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class ProfileFragmentPenyedia extends Fragment {
 
-    ImageView ivurl;
-    final String url = "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg";
-
     public ProfileFragmentPenyedia() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_fragment_profile, container, false);
@@ -54,29 +54,23 @@ public class ProfileFragmentPenyedia extends Fragment {
         });
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Detail Penyedia").child(auth.getUid());
-        ivurl = view.findViewById(R.id.gambarpanti);
+        DatabaseReference myRef = database.getReference("Detail Penyedia").child(Objects.requireNonNull(auth.getUid()));
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Penyedia penyedia = dataSnapshot.getValue(Penyedia.class);
                 TextView nama = view.findViewById(R.id.namapanti);
-                TextView kategori = view.findViewById(R.id.kategori);
                 TextView email = view.findViewById(R.id.emailpanti);
                 TextView alamat = view.findViewById(R.id.alamatpanti);
                 TextView kordinat = view.findViewById(R.id.kordinatpanti);
                 TextView notelepon = view.findViewById(R.id.nopanti);
-                nama.setText(penyedia.getNamalapangan());
+                ImageView ivurl = view.findViewById(R.id.gambarlapangan);
+                nama.setText(Objects.requireNonNull(penyedia).getNamalapangan());
                 email.setText(penyedia.getEmaillapangan());
                 alamat.setText(penyedia.getAlamatlapangan());
                 kordinat.setText(penyedia.getKordinatlapangan());
                 notelepon.setText(penyedia.getNotelepon());
-//                kategori.setText(.getKategori());
-//                email.setText(tempat.getEmail());
-//                alamat.setText(tempat.getAlamat());
-//                kordinat.setText(tempat.getKordinat());
-//                notelepon.setText(tempat.getNotelepon());
-//                Picasso.get().load(tempat.getUrlfoto()).into(ivurl);
+                Picasso.get().load(penyedia.getFotolapangan()).into(ivurl);
             }
 
             @Override
@@ -93,7 +87,7 @@ public class ProfileFragmentPenyedia extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getContext(), LandingPage.class);
                 startActivity(intent);
-                getActivity().finish();
+                Objects.requireNonNull(getActivity()).finish();
             }
         });
         return view;

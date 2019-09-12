@@ -23,8 +23,8 @@ import java.util.ArrayList;
 
 public class AdapterPenyedia extends RecyclerView.Adapter<AdapterPenyedia.ViewHolder> {
 
-    private ArrayList<Penyedia> listlokasi;
-    private Context context;
+    private final ArrayList<Penyedia> listlokasi;
+    private final Context context;
 
     public AdapterPenyedia(ArrayList<Penyedia> listlokasi, Context context) {
         this.listlokasi = listlokasi;
@@ -59,11 +59,12 @@ public class AdapterPenyedia extends RecyclerView.Adapter<AdapterPenyedia.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView iv_url;
-        private TextView tv_nama, tv_alamat;
-        private CardView cv_lokasi;
+        private final ImageView iv_url;
+        private final TextView tv_nama;
+        private final TextView tv_alamat;
+        private final CardView cv_lokasi;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             iv_url = itemView.findViewById(R.id.urllapangan);
             tv_nama = itemView.findViewById(R.id.namalapangan);

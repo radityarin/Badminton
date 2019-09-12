@@ -27,72 +27,32 @@ public class Sewa implements Parcelable {
         return idlapangan;
     }
 
-    public void setIdlapangan(String idlapangan) {
-        this.idlapangan = idlapangan;
-    }
-
     public String getNamalapangan() {
         return namalapangan;
-    }
-
-    public void setNamalapangan(String namalapangan) {
-        this.namalapangan = namalapangan;
-    }
-
-    public String getNomorlapangan() {
-        return nomorlapangan;
-    }
-
-    public void setNomorlapangan(String nomorlapangan) {
-        this.nomorlapangan = nomorlapangan;
     }
 
     public String getTglsewa() {
         return tglsewa;
     }
 
-    public void setTglsewa(String tglsewa) {
-        this.tglsewa = tglsewa;
-    }
-
     public String getJamsewa() {
         return jamsewa;
-    }
-
-    public void setJamsewa(String jamsewa) {
-        this.jamsewa = jamsewa;
     }
 
     public String getIdpenyewa() {
         return idpenyewa;
     }
 
-    public void setIdpenyewa(String idpenyewa) {
-        this.idpenyewa = idpenyewa;
-    }
-
     public String getNamapenyewa() {
         return namapenyewa;
-    }
-
-    public void setNamapenyewa(String namapenyewa) {
-        this.namapenyewa = namapenyewa;
     }
 
     public String getStatussewa() {
         return statussewa;
     }
 
-    public void setStatussewa(String statussewa) {
-        this.statussewa = statussewa;
-    }
-
     public String getIdsewa() {
         return idsewa;
-    }
-
-    public void setIdsewa(String idsewa) {
-        this.idsewa = idsewa;
     }
 
 

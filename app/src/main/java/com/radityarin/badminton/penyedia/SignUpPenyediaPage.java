@@ -7,41 +7,35 @@ import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.radityarin.badminton.LoginPage;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.LandingPage;
 import com.radityarin.badminton.pojo.Penyedia;
-import com.sucho.placepicker.PlacePicker;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 
 public class SignUpPenyediaPage extends AppCompatActivity {
-    private final int PLACE_PICKER_REQUEST = 1;
     private FirebaseAuth auth;
-    private EditText inputEmail, inputNama, inputJumlah, inputAlamat, inputNoTelepon, inputPassword, inputHarga;
-    private Button btnDaftar, login;
+    private EditText inputEmail;
+    private EditText inputNama;
+    private EditText inputAlamat;
+    private EditText inputNoTelepon;
+    private EditText inputPassword;
     private String kordinat = "";
     private ProgressDialog PD;
 
@@ -62,13 +56,11 @@ public class SignUpPenyediaPage extends AppCompatActivity {
 
         inputNama = findViewById(R.id.namalapangan);
         inputEmail = findViewById(R.id.emaillapangan);
-//        inputJumlah = findViewById(R.id.jumlahlapangan);
         inputAlamat = findViewById(R.id.alamatlapangan);
         inputNoTelepon = findViewById(R.id.noteleponlapangan);
         inputPassword = findViewById(R.id.passwordlapangan);
-//        inputHarga = findViewById(R.id.hargalapangan);
 
-        login = findViewById(R.id.login);
+        Button login = findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +70,7 @@ public class SignUpPenyediaPage extends AppCompatActivity {
             }
         });
 
-        btnDaftar = findViewById(R.id.buttondaftarpenyedia);
+        Button btnDaftar = findViewById(R.id.buttondaftarpenyedia);
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +90,6 @@ public class SignUpPenyediaPage extends AppCompatActivity {
                 try {
                     List<Address> list = gc.getFromLocationName(alamat, 1);
                     Address add = list.get(0);
-                    String locality = add.getLocality();
                     kordinat = add.getLatitude() + ", " + add.getLongitude();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -115,11 +106,11 @@ public class SignUpPenyediaPage extends AppCompatActivity {
                                                     SignUpPenyediaPage.this,
                                                     "Authentication Failed",
                                                     Toast.LENGTH_LONG).show();
-                                            Log.v("error", task.getResult().toString());
+                                            Log.v("error", Objects.requireNonNull(task.getResult()).toString());
                                         } else {
                                             FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                            DatabaseReference myRef = database.getReference("Detail Penyedia").child(auth.getUid());
-                                            Penyedia penyedia = new Penyedia(auth.getUid(), email, nama, "", alamat, kordinat, "", notelepon, "", "", "", false);
+                                            DatabaseReference myRef = database.getReference("Detail Penyedia").child(Objects.requireNonNull(auth.getUid()));
+                                            Penyedia penyedia = new Penyedia(auth.getUid(), email, nama, "", alamat, kordinat, "", notelepon, "", "", "",nama.toLowerCase(), false);
                                             myRef.setValue(penyedia);
                                             Intent intent = new Intent(SignUpPenyediaPage.this, SignUp2PenyediaPage.class);
                                             startActivity(intent);

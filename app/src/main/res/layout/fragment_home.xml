@@ -45,7 +45,7 @@
             </RelativeLayout>
 
             <SearchView
-                android:id="@+id/sv_movies"
+                android:id="@+id/sv_lapangan"
                 android:layout_marginHorizontal="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
@@ -60,7 +60,7 @@
                 android:id="@+id/recycler_view_lokasi"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_marginTop="10dp" />
 
 
         </LinearLayout>

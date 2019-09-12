@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".admin.TempatPageAdmin"></activity>
+        <activity android:name=".admin.TempatPageAdmin" />
         <activity android:name=".penyedia.KonfirmasiPesananPage" />
         <activity android:name=".admin.MainAdminActivity" />
         <activity android:name=".penyedia.SignUp2PenyediaPage" />
@@ -37,15 +37,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".penyedia.UploadFotoActivity" />
         <activity android:name=".penyedia.MainPenyediaActivity" />
         <activity android:name=".penyedia.SignUpPenyediaPage" />
-        <activity android:name=".penyewa.ListPerKebutuhan" />
         <activity android:name=".penyewa.TempatPage" />
         <activity android:name=".penyewa.PesanPage" />
-        <activity android:name=".penyewa.RincianPage" />
         <activity android:name=".penyewa.KonfirmasiPage" />
-        <activity android:name=".penyewa.ListPerKategoriPage" />
         <activity android:name=".penyewa.SignUpPage" />
         <activity android:name=".LoginPage" />
         <activity android:name=".LandingPage" />

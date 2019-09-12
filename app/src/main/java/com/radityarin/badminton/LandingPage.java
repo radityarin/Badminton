@@ -2,11 +2,12 @@ package com.radityarin.badminton;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,10 +20,11 @@ import com.radityarin.badminton.penyedia.SignUpPenyediaPage;
 import com.radityarin.badminton.penyewa.MainActivity;
 import com.radityarin.badminton.penyewa.SignUpPage;
 
+import java.util.Objects;
+
 public class LandingPage extends AppCompatActivity {
 
-    Button masuk,daftar, daftarpenyedia;
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class LandingPage extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        masuk = findViewById(R.id.buttonmasuk);
+        Button masuk = findViewById(R.id.buttonmasuk);
         masuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +44,7 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
-        daftar = findViewById(R.id.buttondaftar);
+        Button daftar = findViewById(R.id.buttondaftar);
         daftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +54,7 @@ public class LandingPage extends AppCompatActivity {
             }
         });
 
-        daftarpenyedia = findViewById(R.id.daftarpenyedia);
+        Button daftarpenyedia = findViewById(R.id.daftarpenyedia);
         daftarpenyedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,13 +72,10 @@ public class LandingPage extends AppCompatActivity {
 
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-//                 value = dataSnapshot.getValue(String.class);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     boolean penyedia = false;
                     for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                        if(dt.getKey().equals(auth.getUid())){
+                        if(Objects.requireNonNull(dt.getKey()).equals(auth.getUid())){
                             penyedia = true;
                         }
                     }
@@ -91,7 +90,7 @@ public class LandingPage extends AppCompatActivity {
                 }
 
                 @Override
-                public void onCancelled(DatabaseError error) {
+                public void onCancelled(@NonNull DatabaseError error) {
                     // Failed to read value
                 }
             });

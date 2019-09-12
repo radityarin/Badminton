@@ -1,24 +1,18 @@
 package com.radityarin.badminton.penyewa;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,34 +27,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
 public class TempatPage extends AppCompatActivity {
 
     private Penyedia penyedia;
-    private Button btntelepon, btnpeta;
-    private AlertDialog.Builder dialog;
-    private LayoutInflater inflater;
-    private View dialogView;
-    private String jammulai = "";
-    private String jamselesai = "";
-    private SpinnerAdapter spinnerAdapter,spinnerAdapter2;
-//    private ArrayAdapter<String> spinnerArrayAdapter,spinnerArrayAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tempat_page);
-//
-//        String[] jambukaarray = getResources().getStringArray(R.array.jambuka);
-//        spinnerArrayAdapter = new ArrayAdapter<String>(
-//                this, R.layout.spinner_item, jambukaarray
-//        );
-//        String[] jamtutuparray = getResources().getStringArray(R.array.jamtutup);
-//        spinnerArrayAdapter2 = new ArrayAdapter<String>(
-//                this, R.layout.spinner_item, jamtutuparray
-//        );
 
         final ArrayList<Penyedia> listtempat = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -70,10 +48,10 @@ public class TempatPage extends AppCompatActivity {
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (!(mLokasi.getNamalapangan().equalsIgnoreCase(penyedia.getNamalapangan())))
+                    if (!(Objects.requireNonNull(mLokasi).getNamalapangan().equalsIgnoreCase(penyedia.getNamalapangan())))
                         listtempat.add(mLokasi);
                 }
 
@@ -84,7 +62,7 @@ public class TempatPage extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
@@ -120,8 +98,8 @@ public class TempatPage extends AppCompatActivity {
             }
         });
 
-        btntelepon = findViewById(R.id.btn_telepon);
-        btnpeta = findViewById(R.id.btn_peta);
+        Button btntelepon = findViewById(R.id.btn_telepon);
+        Button btnpeta = findViewById(R.id.btn_peta);
         btntelepon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

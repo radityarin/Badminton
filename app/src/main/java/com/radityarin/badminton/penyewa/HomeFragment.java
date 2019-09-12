@@ -1,11 +1,11 @@
 package com.radityarin.badminton.penyewa;
 
 import android.Manifest;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -17,7 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.SearchView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -34,21 +34,26 @@ import com.radityarin.badminton.pojo.Penyedia;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
-public class HomeFragment extends Fragment {
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private String kordinatuser;
     private Location userlocation;
-    private Button refresh;
+    private SearchView svlapangan;
+    private RecyclerView recyclerView;
+    private ArrayList<Penyedia> listtempat;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -56,62 +61,66 @@ public class HomeFragment extends Fragment {
 
         userlocation = new Location("");
         getCurrentLocation();
-        final ArrayList<Penyedia> listtempat = new ArrayList<>();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("Detail Penyedia");
+
+        svlapangan = view.findViewById(R.id.sv_lapangan);
+        svlapangan.setOnQueryTextListener(this);
+        recyclerView = view.findViewById(R.id.recycler_view_lokasi);
+        listtempat = new ArrayList<>();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("Detail Penyedia");
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listtempat.clear();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (!mLokasi.getFotolapangan().equals("") && mLokasi.getActive()) {
+                    if (!Objects.requireNonNull(mLokasi).getFotolapangan().equals("") && mLokasi.getActive()) {
                         listtempat.add(mLokasi);
                     }
                 }
 
-                Log.d("cek kordinat saya", userlocation.getLatitude() + ", " + userlocation.getLongitude());
-                Location loc = new Location("");
-                HashMap<Float, Penyedia> penyediaHashMap = new HashMap<>();
-                for (int i = 0; i < listtempat.size(); i++) {
-                    String[] latilang = listtempat.get(i).getKordinatlapangan().split(", ");
-                    loc.setLatitude(Double.parseDouble(latilang[0]));
-                    loc.setLongitude(Double.parseDouble(latilang[1]));
-                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
-                    penyediaHashMap.put(userlocation.distanceTo(loc), listtempat.get(i));
-                }
-
-                ArrayList<Float> sortedkeys = new ArrayList<>(penyediaHashMap.keySet());
-                Collections.sort(sortedkeys);
-                listtempat.clear();
-                for (Float key : sortedkeys) {
-                    listtempat.add(penyediaHashMap.get(key));
-                }
-                for (int i = 0; i < listtempat.size(); i++) {
-                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
-                }
-                RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lokasi);
+//                Log.d("cek kordinat saya", userlocation.getLatitude() + ", " + userlocation.getLongitude());
+//                Location loc = new Location("");
+//                HashMap<Float, Penyedia> penyediaHashMap = new HashMap<>();
+//                for (int i = 0; i < listtempat.size(); i++) {
+//                    String[] latilang = listtempat.get(i).getKordinatlapangan().split(", ");
+//                    loc.setLatitude(Double.parseDouble(latilang[0]));
+//                    loc.setLongitude(Double.parseDouble(latilang[1]));
+//                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
+//                    penyediaHashMap.put(userlocation.distanceTo(loc), listtempat.get(i));
+//                }
+//
+//                ArrayList<Float> sortedkeys = new ArrayList<>(penyediaHashMap.keySet());
+//                Collections.sort(sortedkeys);
+//                listtempat.clear();
+//                for (Float key : sortedkeys) {
+//                    listtempat.add(penyediaHashMap.get(key));
+//                }
+//                for (int i = 0; i < listtempat.size(); i++) {
+//                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
+//                }
                 recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 
-        refresh = view.findViewById(R.id.refreshbutton);
+        Button refresh = view.findViewById(R.id.refreshbutton);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         listtempat.clear();
                         for (DataSnapshot dt : dataSnapshot.getChildren()) {
                             Penyedia mLokasi = dt.getValue(Penyedia.class);
-                            if (!mLokasi.getFotolapangan().equals("")) {
+                            if (!Objects.requireNonNull(mLokasi).getFotolapangan().equals("") && mLokasi.getActive()) {
                                 listtempat.add(mLokasi);
                             }
                         }
@@ -136,13 +145,15 @@ public class HomeFragment extends Fragment {
                         for (int i = 0; i < listtempat.size(); i++) {
                             Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
                         }
-                        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lokasi);
+                        for (Penyedia a : listtempat) {
+                            Log.d("cek",a.getNamalapangan());
+                        }
                         recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError error) {
+                    public void onCancelled(@NonNull DatabaseError error) {
                         Log.w(TAG, "Failed to read value.", error.toException());
                     }
                 });
@@ -154,9 +165,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void getCurrentLocation() {
-        FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(getContext());
+        FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getContext()));
 
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    Activity#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -180,11 +191,37 @@ public class HomeFragment extends Fragment {
                     String[] latlang = kordinatuser.split(", ");
                     userlocation.setLatitude(Double.parseDouble(latlang[0]));
                     userlocation.setLongitude(Double.parseDouble(latlang[1]));
-//                    Toast.makeText(getContext(),
-//                            "Lat : " + location.getLatitude() + " Long : " + location.getLongitude(),
-//                            Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        query = query.toLowerCase();
+        database.getReference().child("Detail Penyedia").orderByChild("namalapangansmallcase").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listtempat.clear();
+                for(DataSnapshot dt : dataSnapshot.getChildren()){
+                    Penyedia penyedia = dt.getValue(Penyedia.class);
+                    Log.d("cek",penyedia.getNamalapangan());
+                    listtempat.add(penyedia);
+                }
+                recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

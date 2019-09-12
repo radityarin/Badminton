@@ -22,6 +22,7 @@ import com.radityarin.badminton.adapter.AdapterPenyediaAdmin;
 import com.radityarin.badminton.pojo.Penyedia;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -37,7 +38,7 @@ public class ActiveFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_active, container, false);
@@ -50,7 +51,7 @@ public class ActiveFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (mLokasi.getActive() == true) {
+                    if (Objects.requireNonNull(mLokasi).getActive()) {
                         penyedias.add(mLokasi);
                     }
                 }

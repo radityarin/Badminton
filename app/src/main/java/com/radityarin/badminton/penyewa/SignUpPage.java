@@ -21,11 +21,12 @@ import com.radityarin.badminton.LandingPage;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.pojo.Profil;
 
+import java.util.Objects;
+
 
 public class SignUpPage extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText inputNama, inputEmail,inputPassword, inputNOHP;
-    private Button btnDaftar;
     private ProgressDialog PD;
 
     @Override
@@ -49,7 +50,7 @@ public class SignUpPage extends AppCompatActivity {
         inputNOHP = findViewById(R.id.noHp);
         inputPassword = findViewById(R.id.password);
 
-        btnDaftar = findViewById(R.id.buttondaftar);
+        Button btnDaftar = findViewById(R.id.buttondaftar);
         btnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,10 +75,10 @@ public class SignUpPage extends AppCompatActivity {
                                                     SignUpPage.this,
                                                     "Authentication Failed",
                                                     Toast.LENGTH_LONG).show();
-                                            Log.v("error", task.getResult().toString());
+                                            Log.v("error", Objects.requireNonNull(task.getResult()).toString());
                                         } else {
                                             FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                            DatabaseReference myRef = database.getReference("Detail Pengguna").child(auth.getUid());
+                                            DatabaseReference myRef = database.getReference("Detail Pengguna").child(Objects.requireNonNull(auth.getUid()));
                                             Profil profil = new Profil(auth.getUid(),nama,email,nohp);
                                             myRef.setValue(profil);
                                             Intent intent = new Intent(SignUpPage.this, MainActivity.class);

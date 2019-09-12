@@ -13,16 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.penyedia.KonfirmasiPesananPage;
-import com.radityarin.badminton.pojo.Penyedia;
 import com.radityarin.badminton.pojo.Sewa;
 
 import java.util.ArrayList;
 
 public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> {
 
-    private ArrayList<Sewa> listsewa;
-    private Context context;
-    private boolean penyedia;
+    private final ArrayList<Sewa> listsewa;
+    private final Context context;
+    private final boolean penyedia;
 
     public AdapterOrder(ArrayList<Sewa> listsewa, Context context, boolean penyedia) {
         this.listsewa = listsewa;
@@ -60,14 +59,14 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        View view;
+        final View view;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
         }
 
-        public void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa) {
+        void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa) {
             TextView tvnamalapangan = view.findViewById(R.id.namalapangansewa);
             tvnamalapangan.setText(lapangansewa);
             TextView tvtanggalsewa = view.findViewById(R.id.tanggalsewa);

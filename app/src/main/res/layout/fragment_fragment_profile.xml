@@ -11,7 +11,7 @@
         android:layout_height="200dp"
         >
         <ImageView
-            android:id="@+id/gambarpanti"
+            android:id="@+id/gambarlapangan"
             android:elevation="2dp"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"

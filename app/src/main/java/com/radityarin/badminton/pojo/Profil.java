@@ -2,7 +2,10 @@ package com.radityarin.badminton.pojo;
 
 public class Profil {
 
-    private String userId, namaUser, emailUser, nomorHP;
+    private String userId;
+    private String namaUser;
+    private String emailUser;
+    private String nomorHP;
 
     public Profil() {
     }
@@ -18,32 +21,15 @@ public class Profil {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getNamaUser() {
         return namaUser;
-    }
-
-    public void setNamaUser(String namaUser) {
-        this.namaUser = namaUser;
     }
 
     public String getEmailUser() {
         return emailUser;
     }
 
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
-
     public String getNomorHP() {
         return nomorHP;
     }
-
-    public void setNomorHP(String nomorHP) {
-        this.nomorHP = nomorHP;
-    }
-
 }

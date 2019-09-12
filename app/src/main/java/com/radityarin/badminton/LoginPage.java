@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,20 +25,19 @@ import com.radityarin.badminton.admin.MainAdminActivity;
 import com.radityarin.badminton.penyedia.MainPenyediaActivity;
 import com.radityarin.badminton.penyewa.MainActivity;
 
+import java.util.Objects;
+
 public class LoginPage extends AppCompatActivity {
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
-    private Button btnMasuk, btnBack;
     private ProgressDialog PD;
-
-//    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        btnBack = findViewById(R.id.backbutton);
+        Button btnBack = findViewById(R.id.backbutton);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +47,7 @@ public class LoginPage extends AppCompatActivity {
 
         inputEmail = findViewById(R.id.emaillogin);
         inputPassword = findViewById(R.id.passwordlogin);
-        btnMasuk = findViewById(R.id.buttonlogin);
+        Button btnMasuk = findViewById(R.id.buttonlogin);
         auth = FirebaseAuth.getInstance();
 
         btnMasuk.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +55,6 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 final String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
-//                final String email = "lapangan1@gmail.com";
-//                final String password = "password";
                 PD = new ProgressDialog(LoginPage.this);
                 PD.setMessage("Loading...");
                 PD.setCancelable(true);
@@ -81,22 +77,17 @@ public class LoginPage extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             PD.dismiss();
                                             // Sign in success, update UI with the signed-in user's information
-                                            FirebaseUser user = auth.getCurrentUser();
                                             Toast.makeText(LoginPage.this, "Berhasil", Toast.LENGTH_SHORT).show();
                                             final FirebaseAuth auth = FirebaseAuth.getInstance();
-//                                            FirebaseAuth auth = FirebaseAuth.getInstance();
                                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                                             DatabaseReference myRef = database.getReference("Detail Penyedia");
 
                                             myRef.addValueEventListener(new ValueEventListener() {
                                                 @Override
-                                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                                    // This method is called once with the initial value and again
-                                                    // whenever data at this location is updated.
-//                 value = dataSnapshot.getValue(String.class);
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     boolean penyedia = false;
                                                     for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                                                        if (dt.getKey().equals(auth.getUid())) {
+                                                        if (Objects.requireNonNull(dt.getKey()).equals(auth.getUid())) {
                                                             penyedia = true;
                                                         }
                                                     }
@@ -108,7 +99,7 @@ public class LoginPage extends AppCompatActivity {
                                                 }
 
                                                 @Override
-                                                public void onCancelled(DatabaseError error) {
+                                                public void onCancelled(@NonNull DatabaseError error) {
                                                     // Failed to read value
                                                 }
                                             });
@@ -152,13 +143,12 @@ public class LoginPage extends AppCompatActivity {
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-//                 value = dataSnapshot.getValue(String.class);
                 boolean penyedia = false;
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                    if (dt.getKey().equals(auth.getUid())) {
+                    if (Objects.requireNonNull(dt.getKey()).equals(auth.getUid())) {
                         penyedia = true;
                     }
                 }
@@ -170,7 +160,7 @@ public class LoginPage extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
             }
         });

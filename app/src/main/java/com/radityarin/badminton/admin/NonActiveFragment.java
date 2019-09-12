@@ -26,6 +26,7 @@ import com.radityarin.badminton.adapter.AdapterPenyediaAdmin;
 import com.radityarin.badminton.pojo.Penyedia;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +34,6 @@ import java.util.ArrayList;
 public class NonActiveFragment extends Fragment {
 
     private ArrayList<Penyedia> penyedias;
-    private Button btnlogout;
 
     public NonActiveFragment() {
         // Required empty public constructor
@@ -41,20 +41,20 @@ public class NonActiveFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view =  inflater.inflate(R.layout.fragment_non_active, container, false);
         penyedias = new ArrayList<>();
 
-        btnlogout = view.findViewById(R.id.btnLogOut);
+        Button btnlogout = view.findViewById(R.id.btnLogOut);
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getContext(), LandingPage.class);
                 startActivity(intent);
-                getActivity().finish();
+                Objects.requireNonNull(getActivity()).finish();
             }
         });
 
@@ -65,7 +65,7 @@ public class NonActiveFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (mLokasi.getActive() == false) {
+                    if (!Objects.requireNonNull(mLokasi).getActive()) {
                         penyedias.add(mLokasi);
                     }
                 }

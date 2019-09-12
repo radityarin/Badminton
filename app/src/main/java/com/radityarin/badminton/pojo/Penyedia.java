@@ -4,13 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Penyedia implements Parcelable {
-    private String idlapangan, emaillapangan, namalapangan, jumlahlapangan, alamatlapangan, kordinatlapangan, fotolapangan, notelepon, jambuka, jamtutup, harga;
+    private String idlapangan, emaillapangan, namalapangan, jumlahlapangan, alamatlapangan, kordinatlapangan, fotolapangan, notelepon, jambuka, jamtutup, harga,namalapangansmallcase;
     private Boolean active;
 
     public Penyedia() {
     }
 
-    public Penyedia(String idlapangan, String emaillapangan, String namalapangan, String jumlahlapangan, String alamatlapangan, String kordinatlapangan, String fotolapangan, String notelepon, String jambuka, String jamtutup, String harga, Boolean active) {
+    public Penyedia(String idlapangan, String emaillapangan, String namalapangan, String jumlahlapangan, String alamatlapangan, String kordinatlapangan, String fotolapangan, String notelepon, String jambuka, String jamtutup, String harga, String namalapangansmallcase, Boolean active) {
         this.idlapangan = idlapangan;
         this.emaillapangan = emaillapangan;
         this.namalapangan = namalapangan;
@@ -22,6 +22,7 @@ public class Penyedia implements Parcelable {
         this.jambuka = jambuka;
         this.jamtutup = jamtutup;
         this.harga = harga;
+        this.namalapangansmallcase = namalapangansmallcase;
         this.active = active;
     }
 
@@ -29,97 +30,54 @@ public class Penyedia implements Parcelable {
         return idlapangan;
     }
 
-    public void setIdlapangan(String idlapangan) {
-        this.idlapangan = idlapangan;
-    }
-
     public String getEmaillapangan() {
         return emaillapangan;
-    }
-
-    public void setEmaillapangan(String emaillapangan) {
-        this.emaillapangan = emaillapangan;
     }
 
     public String getNamalapangan() {
         return namalapangan;
     }
 
-    public void setNamalapangan(String namalapangan) {
-        this.namalapangan = namalapangan;
-    }
-
     public String getJumlahlapangan() {
         return jumlahlapangan;
-    }
-
-    public void setJumlahlapangan(String jumlahlapangan) {
-        this.jumlahlapangan = jumlahlapangan;
     }
 
     public String getAlamatlapangan() {
         return alamatlapangan;
     }
 
-    public void setAlamatlapangan(String alamatlapangan) {
-        this.alamatlapangan = alamatlapangan;
-    }
-
     public String getKordinatlapangan() {
         return kordinatlapangan;
-    }
-
-    public void setKordinatlapangan(String kordinatlapangan) {
-        this.kordinatlapangan = kordinatlapangan;
     }
 
     public String getFotolapangan() {
         return fotolapangan;
     }
 
-    public void setFotolapangan(String fotolapangan) {
-        this.fotolapangan = fotolapangan;
-    }
-
     public String getNotelepon() {
         return notelepon;
-    }
-
-    public void setNotelepon(String notelepon) {
-        this.notelepon = notelepon;
     }
 
     public String getJambuka() {
         return jambuka;
     }
 
-    public void setJambuka(String jambuka) {
-        this.jambuka = jambuka;
-    }
-
     public String getJamtutup() {
         return jamtutup;
-    }
-
-    public void setJamtutup(String jamtutup) {
-        this.jamtutup = jamtutup;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 
     public String getHarga() {
         return harga;
     }
 
-    public void setHarga(String harga) {
-        this.harga = harga;
+    public String getNamalapangansmallcase() {
+        return namalapangansmallcase;
     }
+
+    public Boolean getActive() {
+        return active;
+    }
+
 
     @Override
     public int describeContents() {
@@ -139,6 +97,7 @@ public class Penyedia implements Parcelable {
         dest.writeString(this.jambuka);
         dest.writeString(this.jamtutup);
         dest.writeString(this.harga);
+        dest.writeString(this.namalapangansmallcase);
         dest.writeValue(this.active);
     }
 
@@ -154,6 +113,7 @@ public class Penyedia implements Parcelable {
         this.jambuka = in.readString();
         this.jamtutup = in.readString();
         this.harga = in.readString();
+        this.namalapangansmallcase = in.readString();
         this.active = (Boolean) in.readValue(Boolean.class.getClassLoader());
     }
 
