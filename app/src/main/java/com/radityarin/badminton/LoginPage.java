@@ -37,11 +37,11 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        Button btnBack = findViewById(R.id.backbutton);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        Button backbutton = findViewById(R.id.backbutton);
+        backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginPage.this, LandingPage.class));
+            public void onClick(View v) {
+                finish();
             }
         });
 

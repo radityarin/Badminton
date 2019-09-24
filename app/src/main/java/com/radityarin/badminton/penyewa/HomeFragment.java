@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private String kordinatuser;
     private Location userlocation;
-    private SearchView svlapangan;
     private RecyclerView recyclerView;
     private ArrayList<Penyedia> listtempat;
     private FirebaseDatabase database;
@@ -62,7 +61,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         userlocation = new Location("");
         getCurrentLocation();
 
-        svlapangan = view.findViewById(R.id.sv_lapangan);
+        SearchView svlapangan = view.findViewById(R.id.sv_lapangan);
         svlapangan.setOnQueryTextListener(this);
         recyclerView = view.findViewById(R.id.recycler_view_lokasi);
         listtempat = new ArrayList<>();
@@ -75,31 +74,11 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                 listtempat.clear();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (!Objects.requireNonNull(mLokasi).getFotolapangan().equals("") && mLokasi.getActive()) {
+                    if (mLokasi.getActive()) {
                         listtempat.add(mLokasi);
                     }
                 }
 
-//                Log.d("cek kordinat saya", userlocation.getLatitude() + ", " + userlocation.getLongitude());
-//                Location loc = new Location("");
-//                HashMap<Float, Penyedia> penyediaHashMap = new HashMap<>();
-//                for (int i = 0; i < listtempat.size(); i++) {
-//                    String[] latilang = listtempat.get(i).getKordinatlapangan().split(", ");
-//                    loc.setLatitude(Double.parseDouble(latilang[0]));
-//                    loc.setLongitude(Double.parseDouble(latilang[1]));
-//                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
-//                    penyediaHashMap.put(userlocation.distanceTo(loc), listtempat.get(i));
-//                }
-//
-//                ArrayList<Float> sortedkeys = new ArrayList<>(penyediaHashMap.keySet());
-//                Collections.sort(sortedkeys);
-//                listtempat.clear();
-//                for (Float key : sortedkeys) {
-//                    listtempat.add(penyediaHashMap.get(key));
-//                }
-//                for (int i = 0; i < listtempat.size(); i++) {
-//                    Log.d("cek jarak", listtempat.get(i).getNamalapangan() + listtempat.get(i).getAlamatlapangan() + " = " + userlocation.distanceTo(loc));
-//                }
                 recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             }
@@ -205,7 +184,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                 listtempat.clear();
                 for(DataSnapshot dt : dataSnapshot.getChildren()){
                     Penyedia penyedia = dt.getValue(Penyedia.class);
-                    Log.d("cek",penyedia.getNamalapangan());
+                    Log.d("cek", Objects.requireNonNull(penyedia).getNamalapangan());
                     listtempat.add(penyedia);
                 }
                 recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));

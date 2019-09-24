@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@android:color/white"
@@ -13,11 +12,12 @@
         android:src="@drawable/badminbg"
         android:scaleType="centerCrop"
         android:contentDescription="TODO" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/bgdarker"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        android:src="@drawable/bgdarker" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
             android:background="@drawable/buttonborder2"
             android:text="Daftar"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -125,26 +125,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:background="@drawable/buttonsolid2"
-            android:text="Daftar penyedia"
+            android:text="@string/daftar_penyedia"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             android:layout_marginBottom="32dp"
             android:textSize="20sp"
             android:textStyle="bold" />
-        <!---->
-        <!--<TextView-->
-            <!--android:id="@+id/daftarpenyedia"-->
-            <!--android:layout_marginTop="16dp"-->
-            <!--android:layout_below="@id/atau"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Penyedia lapangan? Daftar disini"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:layout_marginBottom="32dp"-->
-            <!--android:textSize="16sp" />-->
-
     </RelativeLayout>
 
 

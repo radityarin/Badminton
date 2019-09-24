@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.pojo.Sewa;
 
-public class KonfirmasiPesananPage extends AppCompatActivity {
+public class KonfirmasiPesananPage extends AppCompatActivity{
 
     private Sewa sewa;
     private EditText edtnolapangan;
@@ -24,6 +24,14 @@ public class KonfirmasiPesananPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_konfirmasi_pesanan_page);
+
+        Button backbutton = findViewById(R.id.backbutton);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         LinearLayout llinputnolapangan = findViewById(R.id.llinputnolapangan);
         LinearLayout llbuttonkonfirmasi = findViewById(R.id.llbuttonkonfirmasi);

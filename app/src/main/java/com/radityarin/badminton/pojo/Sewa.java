@@ -55,6 +55,9 @@ public class Sewa implements Parcelable {
         return idsewa;
     }
 
+    public String getNomorlapangan() {
+        return nomorlapangan;
+    }
 
     @Override
     public int describeContents() {

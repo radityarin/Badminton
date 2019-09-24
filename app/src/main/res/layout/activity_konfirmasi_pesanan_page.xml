@@ -30,7 +30,7 @@
             android:layout_width="374dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Review Reservasi"
+            android:text="@string/review_reservasi"
             android:textColor="@android:color/black"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Nama Penyewa"
+            android:text="@string/nama_penyewa"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
-            android:text="Tony Stark"
+            android:text="@string/tony_stark"
             android:textSize="20sp" />
 
         <TextView

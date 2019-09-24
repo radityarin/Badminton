@@ -32,7 +32,7 @@ public class TempatPageAdmin extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(TempatPageAdmin.this, MainAdminActivity.class));
+                finish();
             }
         });
 

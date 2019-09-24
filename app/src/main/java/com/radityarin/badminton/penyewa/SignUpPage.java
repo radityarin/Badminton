@@ -38,10 +38,9 @@ public class SignUpPage extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SignUpPage.this, LandingPage.class));
+                finish();
             }
         });
-
 
         auth = FirebaseAuth.getInstance();
 
@@ -79,7 +78,7 @@ public class SignUpPage extends AppCompatActivity {
                                         } else {
                                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                                             DatabaseReference myRef = database.getReference("Detail Pengguna").child(Objects.requireNonNull(auth.getUid()));
-                                            Profil profil = new Profil(auth.getUid(),nama,email,nohp);
+                                            Profil profil = new Profil(auth.getUid(),nama,email,nohp,"");
                                             myRef.setValue(profil);
                                             Intent intent = new Intent(SignUpPage.this, MainActivity.class);
                                             startActivity(intent);

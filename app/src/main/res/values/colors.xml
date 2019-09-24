@@ -2,8 +2,17 @@
 <resources>
     <color name="colorPrimary">#4CAF50</color>
     <color name="colorPrimaryDark">#388E3C</color>
-    <color name="colorAccent">#FF5722</color>
+    <color name="colorAccent">#F57C00</color>
     <color name="Transparent">#00000000</color>
     <color name="PrimaryText">#212121</color>
     <color name="colorBackgroundAzure">#fbfbfb</color>
+
+    <color name="starColor">#F57C00</color>
+    <color name="noteDescriptionTextColor">#F57C00</color>
+    <color name="titleTextColor">#4CAF50</color>
+    <color name="descriptionTextColor">#A6FFFFFF</color>
+    <color name="commentTextColor">#000000</color>
+    <color name="hintTextColor">#55000000</color>
+    <color name="contentTextColor">#4CAF50</color>
+    <color name="commentBackgroundColor">#E2E2E2</color>
 </resources>

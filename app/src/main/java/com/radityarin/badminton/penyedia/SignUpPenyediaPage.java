@@ -48,7 +48,7 @@ public class SignUpPenyediaPage extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SignUpPenyediaPage.this, LandingPage.class));
+                finish();
             }
         });
 
@@ -112,6 +112,7 @@ public class SignUpPenyediaPage extends AppCompatActivity {
                                             DatabaseReference myRef = database.getReference("Detail Penyedia").child(Objects.requireNonNull(auth.getUid()));
                                             Penyedia penyedia = new Penyedia(auth.getUid(), email, nama, "", alamat, kordinat, "", notelepon, "", "", "",nama.toLowerCase(), false);
                                             myRef.setValue(penyedia);
+                                            PD.dismiss();
                                             Intent intent = new Intent(SignUpPenyediaPage.this, SignUp2PenyediaPage.class);
                                             startActivity(intent);
                                             finish();

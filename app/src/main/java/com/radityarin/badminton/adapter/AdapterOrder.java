@@ -38,7 +38,7 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.display(listsewa.get(position).getNamalapangan(), listsewa.get(position).getTglsewa(), listsewa.get(position).getJamsewa(), listsewa.get(position).getStatussewa());
+        holder.display(listsewa.get(position).getNamalapangan(), listsewa.get(position).getTglsewa(), listsewa.get(position).getJamsewa(), listsewa.get(position).getStatussewa(),listsewa.get(position).getNomorlapangan());
         if (penyedia){
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,9 +66,13 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
             view = itemView;
         }
 
-        void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa) {
+        void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa, String nomorlapangan) {
             TextView tvnamalapangan = view.findViewById(R.id.namalapangansewa);
-            tvnamalapangan.setText(lapangansewa);
+            if(statussewa.equalsIgnoreCase("Belum dikonfirmasi")) {
+                tvnamalapangan.setText(lapangansewa);
+            } else {
+                tvnamalapangan.setText(lapangansewa + " Lap. no " + nomorlapangan);
+            }
             TextView tvtanggalsewa = view.findViewById(R.id.tanggalsewa);
             tvtanggalsewa.setText(tanggalsewa);
             TextView tvjamsewa = view.findViewById(R.id.jamsewa);

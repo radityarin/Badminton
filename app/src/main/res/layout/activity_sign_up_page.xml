@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:text="Daftar"
+                android:text="@string/daftar"
                 android:textColor="@color/colorPrimary"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -38,7 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/buttonborder"
-                android:hint="Nama"
+                android:hint="@string/nama"
+                android:inputType="textPersonName"
                 android:paddingHorizontal="16dp"
                 tools:targetApi="o" />
 
@@ -48,7 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/buttonborder"
-                android:hint="No HP"
+                android:hint="@string/no_hp"
+                android:inputType="number"
                 android:paddingHorizontal="16dp"
                 tools:targetApi="o" />
 
@@ -58,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/buttonborder"
-                android:hint="Email"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:paddingHorizontal="16dp"
                 tools:targetApi="o" />
 
@@ -68,7 +70,7 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/buttonborder"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:paddingHorizontal="16dp"
                 tools:targetApi="o" />
@@ -87,7 +89,7 @@
                 android:layout_height="60dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/buttonborder"
-                android:text="Daftar"
+                android:text="@string/daftar"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textSize="24sp" />
@@ -96,12 +98,11 @@
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/buttonlogin"
                 android:layout_marginBottom="16dp"
                 android:background="@color/Transparent"
-                android:text="Sudah memiliki akun? Login disini"
+                android:text="@string/sudah_memiliki_akun_login_disini"
                 android:textAllCaps="false"
-                android:textColor="@color/PrimaryText"
+                android:textColor="@android:color/darker_gray"
                 android:textSize="16sp" />
         </LinearLayout>
 </RelativeLayout>

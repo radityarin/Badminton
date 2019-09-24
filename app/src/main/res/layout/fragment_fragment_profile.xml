@@ -42,24 +42,13 @@
         android:visibility="invisible">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:paddingVertical="12dp"
-            android:paddingLeft="8dp"
-            android:text="Edit"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            tools:targetApi="o" />
-
-        <TextView
             android:id="@+id/btnLogOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingVertical="12dp"
             android:paddingLeft="8dp"
-            android:text="Keluar"
+            android:text="@string/keluar"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             tools:targetApi="o" />
@@ -91,22 +80,13 @@
                     android:id="@+id/namapanti"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Dummy"
+                    android:layout_marginVertical="16dp"
+                    android:text="@string/dummy"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/kategori"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Kategori"
-                    android:textAlignment="center" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -175,7 +155,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Email" />
+                        android:text="@string/email" />
 
                     <TextView
                         android:id="@+id/emailpanti"
@@ -183,7 +163,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="None" />
+                        android:text="@string/none" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -195,7 +175,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Alamat" />
+                        android:text="@string/alamat" />
 
                     <TextView
                         android:id="@+id/alamatpanti"
@@ -203,7 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="None" />
+                        android:text="@string/none" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -215,7 +195,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Kordinat" />
+                        android:text="@string/kordinat" />
 
                     <TextView
                         android:id="@+id/kordinatpanti"
@@ -223,7 +203,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="None" />
+                        android:text="@string/none" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -235,7 +215,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nomor telepon" />
+                        android:text="@string/nomor_telepon" />
 
                     <TextView
                         android:id="@+id/nopanti"
@@ -243,7 +223,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="None" />
+                        android:text="@string/none" />
 
                 </LinearLayout>
 

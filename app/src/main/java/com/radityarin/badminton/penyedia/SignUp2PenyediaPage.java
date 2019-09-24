@@ -44,7 +44,6 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
     private StorageReference imageStorage;
     private String jumlah,harga;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +54,13 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
         inputJumlah = findViewById(R.id.jumlahlapangan);
         inputHarga = findViewById(R.id.hargalapangan);
 
-        Button btnkonfirmasi = findViewById(R.id.buttondaftarpenyedia2);
+        Button backbutton = findViewById(R.id.backbutton);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         ivfotolapangan = findViewById(R.id.uploadfotolapangan);
         ivfotolapangan.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +110,10 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
             }
         });
 
+        Button btnkonfirmasi = findViewById(R.id.buttondaftarpenyedia2);
         btnkonfirmasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 jumlah = inputJumlah.getText().toString();
                 harga = inputHarga.getText().toString();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();

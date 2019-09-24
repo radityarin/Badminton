@@ -25,8 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/pantifoto"
-                android:contentDescription="TODO" />
+                android:src="@drawable/lapanganbadminton"
+                android:contentDescription="@string/foto_lapangan" />
 
             <View
                 android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:id="@+id/namalapangan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Panti Asuhan A"
+                android:text="@string/lapangan_a"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -58,7 +58,7 @@
                 android:id="@+id/alamatlapangan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Jl. Watugong no Brapa"
+                android:text="@string/jl_watugong_no_brapa"
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </RelativeLayout>

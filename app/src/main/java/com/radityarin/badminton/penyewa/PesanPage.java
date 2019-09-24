@@ -32,6 +32,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Objects;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private Penyedia penyedia;
@@ -119,9 +121,21 @@ public class PesanPage extends AppCompatActivity implements DatePickerDialog.OnD
                     DatabaseReference myRef = database.getReference("Detail Sewa").child(String.valueOf(child+1));
                     Sewa sewa = new Sewa(penyedia.getIdlapangan(), penyedia.getNamalapangan(), "", tanggal, jammulai + " - " + jamselesai, auth.getUid(), profil.getNamaUser(), "Belum dikonfirmasi",String.valueOf(child+1));
                     myRef.setValue(sewa);
-                    Intent intent = new Intent(PesanPage.this, KonfirmasiPage.class);
-                    startActivity(intent);
-                    finish();
+                    SweetAlertDialog pDialog = new SweetAlertDialog(PesanPage.this, SweetAlertDialog.SUCCESS_TYPE);
+                    pDialog.setTitleText("Pemesanan Berhasil!");
+                    pDialog.setCancelable(false);
+                    pDialog.setContentText("Silahkan cek di notifikasi");
+                    pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            sDialog.dismissWithAnimation();
+                            Intent intent = new Intent(PesanPage.this, MainActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                            finish();
+                        }
+                    });
+                    pDialog.show();
                 }
             }
         });

@@ -97,4 +97,38 @@ public class LandingPage extends AppCompatActivity {
         }
         super.onResume();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (auth.getCurrentUser() != null) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("Detail Penyedia");
+
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    boolean penyedia = false;
+                    for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                        if(Objects.requireNonNull(dt.getKey()).equals(auth.getUid())){
+                            penyedia = true;
+                        }
+                    }
+                    if(penyedia){
+                        Intent intent = new Intent(LandingPage.this, MainPenyediaActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        startActivity(new Intent(LandingPage.this, MainActivity.class));
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Failed to read value
+                }
+            });
+        }
+    }
 }

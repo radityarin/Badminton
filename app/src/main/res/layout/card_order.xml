@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/pesanlogo"
-        android:contentDescription="TODO" />
+        android:contentDescription="Icon" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,19 +36,19 @@
             android:id="@+id/tanggalsewa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sabtu, 27 April 2019" />
+            android:text="@string/date" />
 
         <TextView
             android:id="@+id/jamsewa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="12:00 - 13:00" />
+            android:text="@string/_12_00_13_00" />
 
         <TextView
             android:id="@+id/statussewa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Proses penjemputan"
+            android:text="@string/proses_penjemputan"
             android:textColor="@android:color/holo_green_dark"
             android:textStyle="bold
 " />

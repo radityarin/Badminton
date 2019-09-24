@@ -71,7 +71,7 @@ public class TempatPage extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(TempatPage.this, MainActivity.class));
+                finish();
             }
         });
 
