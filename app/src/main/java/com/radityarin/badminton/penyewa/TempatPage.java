@@ -21,8 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.R;
+import com.radityarin.badminton.adapter.AdapterKomentar;
 import com.radityarin.badminton.adapter.AdapterPenyedia;
+import com.radityarin.badminton.adapter.SliderAdapterExample;
 import com.radityarin.badminton.pojo.Penyedia;
+import com.radityarin.badminton.pojo.Rating;
+import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,17 +38,51 @@ import static android.content.ContentValues.TAG;
 public class TempatPage extends AppCompatActivity {
 
     private Penyedia penyedia;
+    private RecyclerView recyclerView;
+    private TextView tvparkiran, tvtoilet, tvruangganti, tvkantin, tvwifi, tvrating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tempat_page);
 
+
         final ArrayList<Penyedia> listtempat = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Detail Penyedia");
 
         penyedia = getIntent().getParcelableExtra("penyedia");
+        tvparkiran = findViewById(R.id.fasilitas_parkiran);
+        tvtoilet = findViewById(R.id.fasilitas_toilet);
+        tvruangganti = findViewById(R.id.fasilitas_ruangganti);
+        tvkantin = findViewById(R.id.fasilitas_kantin);
+        tvwifi = findViewById(R.id.fasilitas_wifi);
+        tvrating = findViewById(R.id.rating);
+
+        tvrating.setText(penyedia.getRating()+" / 5");
+
+        String fasilitas[] = penyedia.getFasilitas().split(";");
+        if (fasilitas[0].equals("false")) {
+            tvparkiran.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_black_24dp, 0, 0, 0);
+        }
+        if (fasilitas[1].equals("false")) {
+            tvtoilet.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_black_24dp, 0, 0, 0);
+        }
+        if (fasilitas[2].equals("false")) {
+            tvruangganti.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_black_24dp, 0, 0, 0);
+        }
+        if (fasilitas[3].equals("false")) {
+            tvkantin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_black_24dp, 0, 0, 0);
+        }
+        if (fasilitas[4].equals("false")) {
+            tvwifi.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_black_24dp, 0, 0, 0);
+        }
+
+        String[] fotolapangan = penyedia.getFotolapangan().split(";");
+        SliderView sliderView = findViewById(R.id.imageSlider);
+        SliderAdapterExample adapter = new SliderAdapterExample(this, fotolapangan);
+
+        sliderView.setSliderAdapter(adapter);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -75,8 +113,6 @@ public class TempatPage extends AppCompatActivity {
             }
         });
 
-        ImageView ivurl = findViewById(R.id.urltempat);
-        Picasso.get().load(penyedia.getFotolapangan()).into(ivurl);
         TextView tvnama = findViewById(R.id.namatempat);
         tvnama.setText(penyedia.getNamalapangan());
         TextView tvalamat = findViewById(R.id.alamattempat);
@@ -116,6 +152,29 @@ public class TempatPage extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 intent.setPackage("com.google.android.apps.maps");
                 startActivity(intent);
+            }
+        });
+
+        recyclerView = findViewById(R.id.recycler_view_komentar);
+        final ArrayList<Rating> listrating = new ArrayList<>();
+        FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+        myRef = database2.getReference("Rating").child(penyedia.getIdlapangan());
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listrating.clear();
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    Rating mRating = dt.getValue(Rating.class);
+                    listrating.add(mRating);
+                }
+
+                recyclerView.setAdapter(new AdapterKomentar(listrating, getApplicationContext()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
     }

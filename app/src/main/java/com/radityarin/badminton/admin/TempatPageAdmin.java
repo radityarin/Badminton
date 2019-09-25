@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.radityarin.badminton.R;
+import com.radityarin.badminton.adapter.SliderAdapterExample;
 import com.radityarin.badminton.pojo.Penyedia;
+import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
@@ -36,8 +38,11 @@ public class TempatPageAdmin extends AppCompatActivity {
             }
         });
 
-        ImageView ivurl = findViewById(R.id.urltempat);
-        Picasso.get().load(penyedia.getFotolapangan()).into(ivurl);
+        String[] fotolapangan = penyedia.getFotolapangan().split(";");
+        SliderView sliderView = findViewById(R.id.imageSlider);
+        SliderAdapterExample adapter = new SliderAdapterExample(this, fotolapangan);
+
+        sliderView.setSliderAdapter(adapter);
         TextView tvnama = findViewById(R.id.namatempat);
         tvnama.setText(penyedia.getNamalapangan());
         TextView tvalamat = findViewById(R.id.alamattempat);

@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.adapter.AdapterOrder;
+import com.radityarin.badminton.pojo.Penyedia;
 import com.radityarin.badminton.pojo.Rating;
 import com.radityarin.badminton.pojo.Sewa;
 import com.stepstone.apprating.AppRatingDialog;
@@ -38,6 +39,7 @@ public class OrderFragment extends Fragment implements RatingDialogListener {
     private FirebaseAuth auth;
     private boolean rating;
     private Sewa sewa;
+    private double ratingPenyedia;
 
     public OrderFragment() {
     }
@@ -124,11 +126,31 @@ public class OrderFragment extends Fragment implements RatingDialogListener {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseRef = database.getReference();
         Rating rating = new Rating(sewa.getIdlapangan(),sewa.getNamalapangan(),sewa.getIdpenyewa(),sewa.getNamapenyewa(),sewa.getIdsewa(),String.valueOf(rate),comment);
-        mDatabaseRef.child("Rating").child(sewa.getIdlapangan()).setValue(rating);
+        mDatabaseRef.child("Rating").child(sewa.getIdlapangan()).child(sewa.getIdsewa()).setValue(rating);
 
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
         final DatabaseReference myref = database2.getReference().child("Detail Sewa");
         myref.child(sewa.getIdsewa()).child("statussewa").setValue("Pesanan Selesai");
+
+
+        DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference().child("Detail Penyedia").child(sewa.getIdlapangan());
+        ratingRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Penyedia penyedia = dataSnapshot.getValue(Penyedia.class);
+                ratingPenyedia = penyedia.getRating();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        FirebaseDatabase database3 = FirebaseDatabase.getInstance();
+        final DatabaseReference myref2 = database3.getReference().child("Detail Penyedia");
+        double finalRating = (ratingPenyedia + rate) /2d;
+        myref2.child(sewa.getIdlapangan()).child("rating").setValue(finalRating);
 
     }
 

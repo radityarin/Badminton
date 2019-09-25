@@ -70,7 +70,13 @@ public class ProfileFragmentPenyedia extends Fragment {
                 alamat.setText(penyedia.getAlamatlapangan());
                 kordinat.setText(penyedia.getKordinatlapangan());
                 notelepon.setText(penyedia.getNotelepon());
-                Picasso.get().load(penyedia.getFotolapangan()).into(ivurl);
+                if(!penyedia.getFotolapangan().equals("")) {
+                    String fotolapangan [] = penyedia.getFotolapangan().split(";");
+                    Picasso.get().load(fotolapangan[0]).into(ivurl);
+                } else {
+                    Intent intent = new Intent(getContext(),SignUp2PenyediaPage.class);
+                    startActivity(intent);
+                }
             }
 
             @Override

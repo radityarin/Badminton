@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,13 +31,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/urltempat"
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/lapanganbadminton"
-                    android:contentDescription="Foto Lapangan" />
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="right"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderCircularHandlerEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="4"
+                    app:sliderStartAutoCycle="true" />
 
                 <View
                     android:layout_width="match_parent"
@@ -51,8 +63,8 @@
             android:id="@+id/namatempat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginHorizontal="16dp"
+            android:gravity="center_vertical"
             android:text="@string/tempat_a"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
@@ -64,13 +76,13 @@
             android:id="@+id/harga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
             android:text="@string/rp_20_000_jam"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            android:layout_marginTop="8dp"
             android:textStyle="bold"
             tools:targetApi="o" />
 
@@ -94,12 +106,12 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_call_black_24dp"
             android:drawablePadding="8dp"
-            android:gravity="center_vertical"
             android:drawableTint="@color/colorPrimary"
+            android:gravity="center_vertical"
             android:paddingHorizontal="16dp"
-            android:textSize="16sp"
             android:text="@string/_0813123123123"
             android:textColor="@android:color/black"
+            android:textSize="16sp"
             tools:targetApi="m" />
 
 
@@ -113,8 +125,22 @@
             android:drawableTint="@color/colorPrimary"
             android:paddingHorizontal="16dp"
             android:text="@string/_08_00_20_00"
-            android:textSize="16sp"
             android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:targetApi="m" />
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_stars_black_24dp"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
+            android:paddingHorizontal="16dp"
+            android:text="4,7/5"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
             tools:targetApi="m" />
 
 
@@ -126,11 +152,111 @@
             android:background="@android:color/darker_gray"
             tools:targetApi="o" />
 
-        <LinearLayout
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fasilitas"
             android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/fasilitas_parkiran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_check_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="Parkiran"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:targetApi="m" />
+
+                <TextView
+                    android:id="@+id/fasilitas_toilet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_check_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="Toilet"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:targetApi="m" />
+
+                <TextView
+                    android:id="@+id/fasilitas_ruangganti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_check_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="Ruang Ganti"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:targetApi="m" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/fasilitas_kantin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_check_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="Kantin"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:targetApi="m" />
+
+                <TextView
+                    android:id="@+id/fasilitas_wifi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_check_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="Wi-Fi"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    tools:targetApi="m" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            tools:targetApi="o" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             tools:targetApi="o">
 
@@ -138,25 +264,25 @@
                 android:id="@+id/btn_telepon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/buttonsolid3"
                 android:text="@string/telepon"
-                android:layout_marginRight="8dp"
                 android:textAllCaps="false"
-                android:textSize="16sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btn_peta"
-                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:layout_weight="1"
-                android:textAllCaps="false"
-                android:textSize="16sp"
                 android:background="@drawable/buttonsolid3"
                 android:text="@string/cek_peta"
-                android:textColor="@android:color/white" />
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <Button
@@ -173,6 +299,42 @@
             android:textColor="@android:color/white"
             android:textSize="24sp"
             tools:targetApi="o" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                tools:targetApi="o">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:text="Komentar"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_komentar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -210,4 +372,4 @@
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

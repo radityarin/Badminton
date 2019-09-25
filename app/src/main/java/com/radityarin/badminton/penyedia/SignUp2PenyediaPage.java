@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -37,12 +38,14 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 1;
     private String jambuka = "";
     private String jamtutup = "";
-    private ImageView ivfotolapangan;
+    private int count = 0;
+    private ImageView ivfotolapangan1, ivfotolapangan2, ivfotolapangan3, ivfotolapangan4, ivfotolapangan5;
     private EditText inputJumlah, inputHarga;
     private FirebaseAuth auth;
-    private String urlfotolapangan;
+    private String urlfotolapangan ="";
     private StorageReference imageStorage;
-    private String jumlah,harga;
+    private String jumlah, harga;
+    private CheckBox cbparkiran, cbtoilet, cbruangganti, cbkantin, cbwifi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +65,48 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
             }
         });
 
-        ivfotolapangan = findViewById(R.id.uploadfotolapangan);
-        ivfotolapangan.setOnClickListener(new View.OnClickListener() {
+        ivfotolapangan1 = findViewById(R.id.uploadfotolapangan1);
+        ivfotolapangan1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
+        ivfotolapangan2 = findViewById(R.id.uploadfotolapangan2);
+        ivfotolapangan2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
+        ivfotolapangan3 = findViewById(R.id.uploadfotolapangan3);
+        ivfotolapangan3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
+        ivfotolapangan4 = findViewById(R.id.uploadfotolapangan4);
+        ivfotolapangan4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            }
+        });
+        ivfotolapangan5 = findViewById(R.id.uploadfotolapangan5);
+        ivfotolapangan5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -110,6 +153,12 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
             }
         });
 
+        cbparkiran = findViewById(R.id.cb_parkiran);
+        cbtoilet = findViewById(R.id.cb_toilet);
+        cbruangganti = findViewById(R.id.cb_ruangganti);
+        cbkantin = findViewById(R.id.cb_kantin);
+        cbwifi = findViewById(R.id.cb_wifi);
+
         Button btnkonfirmasi = findViewById(R.id.buttondaftarpenyedia2);
         btnkonfirmasi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,11 +168,12 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference mDatabaseRef = database.getReference();
                 mDatabaseRef.child("Detail Penyedia").child(Objects.requireNonNull(auth.getUid())).child("fotolapangan").setValue(urlfotolapangan);
-                mDatabaseRef.child("Detail Penyedia").child(auth.getUid()).child("jamsewa").setValue(jambuka+" - "+jamtutup);
+                mDatabaseRef.child("Detail Penyedia").child(auth.getUid()).child("jamsewa").setValue(jambuka + " - " + jamtutup);
                 mDatabaseRef.child("Detail Penyedia").child(auth.getUid()).child("jumlahlapangan").setValue(jumlah);
                 mDatabaseRef.child("Detail Penyedia").child(auth.getUid()).child("harga").setValue(harga);
                 mDatabaseRef.child("Detail Penyedia").child(auth.getUid()).child("jambuka").setValue(jambuka);
                 mDatabaseRef.child("Detail Penyedia").child(auth.getUid()).child("jamtutup").setValue(jamtutup);
+                mDatabaseRef.child("Detail Penyedia").child(auth.getUid()).child("fasilitas").setValue(cbparkiran.isChecked() + ";" + cbtoilet.isChecked() + ";" + cbruangganti.isChecked()+";"+cbkantin.isChecked()+";"+cbwifi.isChecked());
                 Intent intent = new Intent(SignUp2PenyediaPage.this, MainPenyediaActivity.class);
                 startActivity(intent);
             }
@@ -142,8 +192,18 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            ivfotolapangan.setImageBitmap(bitmap);
-
+            if (count == 0) {
+                ivfotolapangan1.setImageBitmap(bitmap);
+            } else if (count == 1) {
+                ivfotolapangan2.setImageBitmap(bitmap);
+            } else if (count == 2) {
+                ivfotolapangan3.setImageBitmap(bitmap);
+            } else if (count == 3) {
+                ivfotolapangan4.setImageBitmap(bitmap);
+            } else if (count == 4) {
+                ivfotolapangan5.setImageBitmap(bitmap);
+            }
+            count++;
 
             final StorageReference filepath = imageStorage.child("Foto Lapangan").child(UUID.randomUUID().toString() + ".jpg");
             filepath.putFile(Objects.requireNonNull(imageUri)).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -161,7 +221,7 @@ public class SignUp2PenyediaPage extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         //mendapatkan link foto
                         Uri downloadUri = task.getResult();
-                        urlfotolapangan = Objects.requireNonNull(downloadUri).toString();
+                        urlfotolapangan = urlfotolapangan + Objects.requireNonNull(downloadUri).toString() + ";";
                     }
                 }
             });

@@ -37,13 +37,48 @@
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
-
-            <ImageView
-                android:id="@+id/uploadfotolapangan"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/ic_add_a_photo_black_24dp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/uploadfotolapangan1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_add_a_photo_black_24dp" />
+                <ImageView
+                    android:id="@+id/uploadfotolapangan2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_add_a_photo_black_24dp" />
+                <ImageView
+                    android:id="@+id/uploadfotolapangan3"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_add_a_photo_black_24dp" />
+                <ImageView
+                    android:id="@+id/uploadfotolapangan4"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:contentDescription="TODO"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_add_a_photo_black_24dp" />
+                <ImageView
+                    android:id="@+id/uploadfotolapangan5"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_add_a_photo_black_24dp" />
+
+            </LinearLayout>
+
 
             <EditText
                 android:id="@+id/jumlahlapangan"
@@ -91,31 +126,51 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/darker_gray"
                 android:text="Fasilitas yang tersedia"
                 android:textSize="16sp"/>
 
             <CheckBox
-                android:id="@+id/cb_windows"
+                android:id="@+id/cb_parkiran"
                 android:layout_width="wrap_content"
+                android:textColor="@android:color/darker_gray"
                 android:layout_height="wrap_content"
                 android:text="Parkiran" />
 
             <CheckBox
-                android:id="@+id/cb_macos"
+                android:id="@+id/cb_toilet"
+                android:textColor="@android:color/darker_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Toilet" />
 
             <CheckBox
-                android:id="@+id/cb_linux"
+                android:id="@+id/cb_ruangganti"
                 android:layout_width="wrap_content"
+                android:textColor="@android:color/darker_gray"
                 android:layout_height="wrap_content"
                 android:text="Ruang Ganti" />
+
+
+            <CheckBox
+                android:id="@+id/cb_kantin"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/darker_gray"
+                android:layout_height="wrap_content"
+                android:text="Kantin" />
+
+            <CheckBox
+                android:id="@+id/cb_wifi"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/darker_gray"
+                android:layout_height="wrap_content"
+                android:text="Wi-Fi" />
 
         </LinearLayout>
 

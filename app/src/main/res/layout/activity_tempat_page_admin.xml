@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".admin.TempatPageAdmin">
 
     <LinearLayout
@@ -29,13 +30,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/urltempat"
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/lapanganbadminton"
-                    android:contentDescription="@string/foto_lapangan" />
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="right"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderCircularHandlerEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="4"
+                    app:sliderStartAutoCycle="true" />
 
                 <View
                     android:layout_width="match_parent"

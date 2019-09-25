@@ -110,7 +110,7 @@ public class SignUpPenyediaPage extends AppCompatActivity {
                                         } else {
                                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                                             DatabaseReference myRef = database.getReference("Detail Penyedia").child(Objects.requireNonNull(auth.getUid()));
-                                            Penyedia penyedia = new Penyedia(auth.getUid(), email, nama, "", alamat, kordinat, "", notelepon, "", "", "",nama.toLowerCase(), false);
+                                            Penyedia penyedia = new Penyedia(auth.getUid(), email, nama, "", alamat, kordinat, "", notelepon, "", "", "",nama.toLowerCase(),"",2.5, false);
                                             myRef.setValue(penyedia);
                                             PD.dismiss();
                                             Intent intent = new Intent(SignUpPenyediaPage.this, SignUp2PenyediaPage.class);

@@ -4,13 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Penyedia implements Parcelable {
-    private String idlapangan, emaillapangan, namalapangan, jumlahlapangan, alamatlapangan, kordinatlapangan, fotolapangan, notelepon, jambuka, jamtutup, harga,namalapangansmallcase;
+    private String idlapangan, emaillapangan, namalapangan, jumlahlapangan, alamatlapangan, kordinatlapangan, fotolapangan, notelepon, jambuka, jamtutup, harga,namalapangansmallcase, fasilitas;
+    private Double rating;
     private Boolean active;
 
     public Penyedia() {
     }
 
-    public Penyedia(String idlapangan, String emaillapangan, String namalapangan, String jumlahlapangan, String alamatlapangan, String kordinatlapangan, String fotolapangan, String notelepon, String jambuka, String jamtutup, String harga, String namalapangansmallcase, Boolean active) {
+    public Penyedia(String idlapangan, String emaillapangan, String namalapangan, String jumlahlapangan, String alamatlapangan, String kordinatlapangan, String fotolapangan, String notelepon, String jambuka, String jamtutup, String harga, String namalapangansmallcase, String fasilitas, Double rating, Boolean active) {
         this.idlapangan = idlapangan;
         this.emaillapangan = emaillapangan;
         this.namalapangan = namalapangan;
@@ -23,8 +24,45 @@ public class Penyedia implements Parcelable {
         this.jamtutup = jamtutup;
         this.harga = harga;
         this.namalapangansmallcase = namalapangansmallcase;
+        this.fasilitas = fasilitas;
+        this.rating = rating;
         this.active = active;
     }
+
+    protected Penyedia(Parcel in) {
+        idlapangan = in.readString();
+        emaillapangan = in.readString();
+        namalapangan = in.readString();
+        jumlahlapangan = in.readString();
+        alamatlapangan = in.readString();
+        kordinatlapangan = in.readString();
+        fotolapangan = in.readString();
+        notelepon = in.readString();
+        jambuka = in.readString();
+        jamtutup = in.readString();
+        harga = in.readString();
+        namalapangansmallcase = in.readString();
+        fasilitas = in.readString();
+        if (in.readByte() == 0) {
+            rating = null;
+        } else {
+            rating = in.readDouble();
+        }
+        byte tmpActive = in.readByte();
+        active = tmpActive == 0 ? null : tmpActive == 1;
+    }
+
+    public static final Creator<Penyedia> CREATOR = new Creator<Penyedia>() {
+        @Override
+        public Penyedia createFromParcel(Parcel in) {
+            return new Penyedia(in);
+        }
+
+        @Override
+        public Penyedia[] newArray(int size) {
+            return new Penyedia[size];
+        }
+    };
 
     public String getIdlapangan() {
         return idlapangan;
@@ -74,6 +112,14 @@ public class Penyedia implements Parcelable {
         return namalapangansmallcase;
     }
 
+    public String getFasilitas() {
+        return fasilitas;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
     public Boolean getActive() {
         return active;
     }
@@ -86,46 +132,25 @@ public class Penyedia implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.idlapangan);
-        dest.writeString(this.emaillapangan);
-        dest.writeString(this.namalapangan);
-        dest.writeString(this.jumlahlapangan);
-        dest.writeString(this.alamatlapangan);
-        dest.writeString(this.kordinatlapangan);
-        dest.writeString(this.fotolapangan);
-        dest.writeString(this.notelepon);
-        dest.writeString(this.jambuka);
-        dest.writeString(this.jamtutup);
-        dest.writeString(this.harga);
-        dest.writeString(this.namalapangansmallcase);
-        dest.writeValue(this.active);
-    }
-
-    protected Penyedia(Parcel in) {
-        this.idlapangan = in.readString();
-        this.emaillapangan = in.readString();
-        this.namalapangan = in.readString();
-        this.jumlahlapangan = in.readString();
-        this.alamatlapangan = in.readString();
-        this.kordinatlapangan = in.readString();
-        this.fotolapangan = in.readString();
-        this.notelepon = in.readString();
-        this.jambuka = in.readString();
-        this.jamtutup = in.readString();
-        this.harga = in.readString();
-        this.namalapangansmallcase = in.readString();
-        this.active = (Boolean) in.readValue(Boolean.class.getClassLoader());
-    }
-
-    public static final Creator<Penyedia> CREATOR = new Creator<Penyedia>() {
-        @Override
-        public Penyedia createFromParcel(Parcel source) {
-            return new Penyedia(source);
+        dest.writeString(idlapangan);
+        dest.writeString(emaillapangan);
+        dest.writeString(namalapangan);
+        dest.writeString(jumlahlapangan);
+        dest.writeString(alamatlapangan);
+        dest.writeString(kordinatlapangan);
+        dest.writeString(fotolapangan);
+        dest.writeString(notelepon);
+        dest.writeString(jambuka);
+        dest.writeString(jamtutup);
+        dest.writeString(harga);
+        dest.writeString(namalapangansmallcase);
+        dest.writeString(fasilitas);
+        if (rating == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(rating);
         }
-
-        @Override
-        public Penyedia[] newArray(int size) {
-            return new Penyedia[size];
-        }
-    };
+        dest.writeByte((byte) (active == null ? 0 : active ? 1 : 2));
+    }
 }

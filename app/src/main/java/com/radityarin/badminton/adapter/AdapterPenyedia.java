@@ -1,6 +1,7 @@
 package com.radityarin.badminton.adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -42,11 +43,15 @@ public class AdapterPenyedia extends RecyclerView.Adapter<AdapterPenyedia.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tv_nama.setText(listlokasi.get(position).getNamalapangan());
         holder.tv_alamat.setText(listlokasi.get(position).getAlamatlapangan());
-        Picasso.get().load(listlokasi.get(position).getFotolapangan()).into(holder.iv_url);
+        if(!listlokasi.get(position).getFotolapangan().equals("")) {
+            String[] fotolapangan = listlokasi.get(position).getFotolapangan().split(";");
+            Picasso.get().load(fotolapangan[0]).into(holder.iv_url);
+        }
         holder.cv_lokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, TempatPage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("penyedia", listlokasi.get(position));
                 context.startActivity(intent);
             }

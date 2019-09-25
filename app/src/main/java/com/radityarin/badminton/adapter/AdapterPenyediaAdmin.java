@@ -41,7 +41,10 @@ public class AdapterPenyediaAdmin extends RecyclerView.Adapter<AdapterPenyediaAd
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tv_nama.setText(listlokasi.get(position).getNamalapangan());
         holder.tv_alamat.setText(listlokasi.get(position).getAlamatlapangan());
-        Picasso.get().load(listlokasi.get(position).getFotolapangan()).into(holder.iv_url);
+        if(!listlokasi.get(position).getFotolapangan().equals("")) {
+            String[] fotolapangan = listlokasi.get(position).getFotolapangan().split(";");
+            Picasso.get().load(fotolapangan[0]).into(holder.iv_url);
+        }
         holder.cv_lokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
