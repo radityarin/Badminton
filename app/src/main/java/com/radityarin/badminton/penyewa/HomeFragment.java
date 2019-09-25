@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                 listtempat.clear();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (mLokasi.getActive()) {
+                    if (mLokasi.isActive()) {
                         listtempat.add(mLokasi);
                     }
                 }
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                         listtempat.clear();
                         for (DataSnapshot dt : dataSnapshot.getChildren()) {
                             Penyedia mLokasi = dt.getValue(Penyedia.class);
-                            if (!Objects.requireNonNull(mLokasi).getFotolapangan().equals("") && mLokasi.getActive()) {
+                            if (!Objects.requireNonNull(mLokasi).getFotolapangan().equals("") && mLokasi.isActive()) {
                                 listtempat.add(mLokasi);
                             }
                         }

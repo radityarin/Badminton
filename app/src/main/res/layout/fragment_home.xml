@@ -19,8 +19,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="16dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="32dp"
                 android:orientation="horizontal"
                 tools:targetApi="o">
@@ -29,26 +29,26 @@
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="Beranda"
                     android:textColor="@android:color/black"
                     android:textSize="32sp"
-                    android:layout_gravity="center_vertical"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/refreshbutton"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_alignParentRight="true"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/ic_refresh_black_24dp"/>
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_refresh_black_24dp" />
             </RelativeLayout>
 
             <SearchView
                 android:id="@+id/sv_lapangan"
-                android:layout_marginHorizontal="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_searchview"
                 android:iconifiedByDefault="false"

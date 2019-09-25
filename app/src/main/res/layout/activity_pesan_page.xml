@@ -16,7 +16,7 @@
     <LinearLayout
         android:id="@+id/lltanggal"
         android:layout_below="@id/backbutton"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -35,7 +35,7 @@
         <TextView
             android:id="@+id/tanggal"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="56dp"
             android:text="@string/pilih_tanggal"
             android:textSize="20sp"
             android:gravity="center_vertical"
@@ -47,7 +47,7 @@
         <Spinner
             android:id="@+id/jammulai"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="56dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/buttonborder"
@@ -57,7 +57,7 @@
         <Spinner
             android:id="@+id/jamselesai"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="56dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/buttonborder"
@@ -68,7 +68,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_above="@id/btnpesan"
         android:background="@android:color/darker_gray"
         android:layout_marginBottom="16dp"/>
@@ -82,7 +82,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/buttonsolid4"
-        android:paddingHorizontal="24dp"
         android:text="@string/pesan"
         android:textAllCaps="false"
         android:textColor="@android:color/white"

@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 public class Penyedia implements Parcelable {
     private String idlapangan, emaillapangan, namalapangan, jumlahlapangan, alamatlapangan, kordinatlapangan, fotolapangan, notelepon, jambuka, jamtutup, harga,namalapangansmallcase, fasilitas;
-    private Double rating;
-    private Boolean active;
+    private double rating;
+    private boolean active;
 
     public Penyedia() {
     }
 
-    public Penyedia(String idlapangan, String emaillapangan, String namalapangan, String jumlahlapangan, String alamatlapangan, String kordinatlapangan, String fotolapangan, String notelepon, String jambuka, String jamtutup, String harga, String namalapangansmallcase, String fasilitas, Double rating, Boolean active) {
+    public Penyedia(String idlapangan, String emaillapangan, String namalapangan, String jumlahlapangan, String alamatlapangan, String kordinatlapangan, String fotolapangan, String notelepon, String jambuka, String jamtutup, String harga, String namalapangansmallcase, String fasilitas, double rating, boolean active) {
         this.idlapangan = idlapangan;
         this.emaillapangan = emaillapangan;
         this.namalapangan = namalapangan;
@@ -43,13 +43,8 @@ public class Penyedia implements Parcelable {
         harga = in.readString();
         namalapangansmallcase = in.readString();
         fasilitas = in.readString();
-        if (in.readByte() == 0) {
-            rating = null;
-        } else {
-            rating = in.readDouble();
-        }
-        byte tmpActive = in.readByte();
-        active = tmpActive == 0 ? null : tmpActive == 1;
+        rating = in.readDouble();
+        active = in.readByte() != 0;
     }
 
     public static final Creator<Penyedia> CREATOR = new Creator<Penyedia>() {
@@ -116,14 +111,13 @@ public class Penyedia implements Parcelable {
         return fasilitas;
     }
 
-    public Double getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
-
 
     @Override
     public int describeContents() {
@@ -145,12 +139,7 @@ public class Penyedia implements Parcelable {
         dest.writeString(harga);
         dest.writeString(namalapangansmallcase);
         dest.writeString(fasilitas);
-        if (rating == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeDouble(rating);
-        }
-        dest.writeByte((byte) (active == null ? 0 : active ? 1 : 2));
+        dest.writeDouble(rating);
+        dest.writeByte((byte) (active ? 1 : 0));
     }
 }

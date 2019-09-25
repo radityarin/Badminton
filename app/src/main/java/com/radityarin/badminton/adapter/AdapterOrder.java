@@ -38,14 +38,14 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.display(listsewa.get(position).getNamalapangan(), listsewa.get(position).getTglsewa(), listsewa.get(position).getJamsewa(), listsewa.get(position).getStatussewa(),listsewa.get(position).getNomorlapangan());
-        if (penyedia){
+        holder.display(listsewa.get(position).getNamalapangan(), listsewa.get(position).getTglsewa(), listsewa.get(position).getJamsewa(), listsewa.get(position).getStatussewa(), listsewa.get(position).getNomorlapangan(), listsewa.get(position).getNamapenyewa());
+        if (penyedia) {
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, KonfirmasiPesananPage.class);
-                    intent.putExtra("sewa",listsewa.get(position));
-                    intent.putExtra("konfirmasi",listsewa.get(position).getStatussewa());
+                    intent.putExtra("sewa", listsewa.get(position));
+                    intent.putExtra("konfirmasi", listsewa.get(position).getStatussewa());
                     context.startActivity(intent);
                 }
             });
@@ -66,12 +66,20 @@ public class AdapterOrder extends RecyclerView.Adapter<AdapterOrder.ViewHolder> 
             view = itemView;
         }
 
-        void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa, String nomorlapangan) {
-            TextView tvnamalapangan = view.findViewById(R.id.namalapangansewa);
-            if(statussewa.equalsIgnoreCase("Belum dikonfirmasi")) {
-                tvnamalapangan.setText(lapangansewa);
+        void display(String lapangansewa, String tanggalsewa, String jamsewa, String statussewa, String nomorlapangan, String namapenyewa) {
+            TextView tvnamalapangan = view.findViewById(R.id.namapenyewa);
+            if (penyedia) {
+                if (statussewa.equalsIgnoreCase("Belum dikonfirmasi")) {
+                    tvnamalapangan.setText(namapenyewa);
+                } else {
+                    tvnamalapangan.setText(namapenyewa + " Lap. no " + nomorlapangan);
+                }
             } else {
-                tvnamalapangan.setText(lapangansewa + " Lap. no " + nomorlapangan);
+                if (statussewa.equalsIgnoreCase("Belum dikonfirmasi")) {
+                    tvnamalapangan.setText(lapangansewa);
+                } else {
+                    tvnamalapangan.setText(lapangansewa + " Lap. no " + nomorlapangan);
+                }
             }
             TextView tvtanggalsewa = view.findViewById(R.id.tanggalsewa);
             tvtanggalsewa.setText(tanggalsewa);

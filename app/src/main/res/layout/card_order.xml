@@ -24,7 +24,7 @@
         tools:targetApi="o">
 
         <TextView
-            android:id="@+id/namalapangansewa"
+            android:id="@+id/namapenyewa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lapangan A"

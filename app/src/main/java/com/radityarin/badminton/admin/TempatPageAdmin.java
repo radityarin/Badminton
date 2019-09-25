@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -16,7 +15,6 @@ import com.radityarin.badminton.R;
 import com.radityarin.badminton.adapter.SliderAdapterExample;
 import com.radityarin.badminton.pojo.Penyedia;
 import com.smarteist.autoimageslider.SliderView;
-import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 
@@ -55,7 +53,7 @@ public class TempatPageAdmin extends AppCompatActivity {
         tvhargalapangan.setText("Rp " + penyedia.getHarga() + " / jam");
 
         Button order = findViewById(R.id.aktivasibutton);
-        if (penyedia.getActive()) {
+        if (penyedia.isActive()) {
             order.setText("Deaktivasi");
         }
         order.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +61,7 @@ public class TempatPageAdmin extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myref = database.getReference().child("Detail Penyedia");
-                if (penyedia.getActive()) {
+                if (penyedia.isActive()) {
                     myref.child(penyedia.getIdlapangan()).child("active").setValue(false);
                 } else {
                     myref.child(penyedia.getIdlapangan()).child("active").setValue(true);

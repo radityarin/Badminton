@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tony Stark"
-            android:textColor="@android:color/darker_gray"
             android:textSize="16sp"
             android:textStyle="bold" />
 

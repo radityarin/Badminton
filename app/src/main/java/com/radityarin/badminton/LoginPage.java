@@ -61,65 +61,68 @@ public class LoginPage extends AppCompatActivity {
                 PD.setCanceledOnTouchOutside(false);
                 PD.show();
 
-                if(email.equals("admin") && password.equals("passwordadmin")){
+                if (email.equals("admin") && password.equals("passwordadmin")) {
                     Intent intent = new Intent(LoginPage.this, MainAdminActivity.class);
                     startActivity(intent);
                     finish();
-                }
 
-                try {
+                } else {
 
-                    if (password.length() > 0 && email.length() > 0) {
-                        auth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(LoginPage.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            PD.dismiss();
-                                            // Sign in success, update UI with the signed-in user's information
-                                            Toast.makeText(LoginPage.this, "Berhasil", Toast.LENGTH_SHORT).show();
-                                            final FirebaseAuth auth = FirebaseAuth.getInstance();
-                                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                            DatabaseReference myRef = database.getReference("Detail Penyedia");
+                    try {
 
-                                            myRef.addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    boolean penyedia = false;
-                                                    for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                                                        if (Objects.requireNonNull(dt.getKey()).equals(auth.getUid())) {
-                                                            penyedia = true;
+                        if (password.length() > 0 && email.length() > 0) {
+                            auth.signInWithEmailAndPassword(email, password)
+                                    .addOnCompleteListener(LoginPage.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                PD.dismiss();
+                                                // Sign in success, update UI with the signed-in user's information
+                                                Toast.makeText(LoginPage.this, "Berhasil", Toast.LENGTH_SHORT).show();
+                                                final FirebaseAuth auth = FirebaseAuth.getInstance();
+                                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                                DatabaseReference myRef = database.getReference("Detail Penyedia");
+
+                                                myRef.addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        boolean penyedia = false;
+                                                        for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                                                            if (Objects.requireNonNull(dt.getKey()).equals(auth.getUid())) {
+                                                                penyedia = true;
+                                                            }
+                                                        }
+                                                        if (penyedia) {
+                                                            Intent intent = new Intent(LoginPage.this, MainPenyediaActivity.class);
+                                                            startActivity(intent);
+                                                            finish();
                                                         }
                                                     }
-                                                    if (penyedia) {
-                                                        Intent intent = new Intent(LoginPage.this, MainPenyediaActivity.class);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }
-                                                }
 
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                    // Failed to read value
-                                                }
-                                            });
-                                            Intent i = new Intent(LoginPage.this, MainActivity.class);
-                                            startActivity(i);
-                                            finish();
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            Toast.makeText(LoginPage.this, "GAGAL", Toast.LENGTH_SHORT).show();
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                        // Failed to read value
+                                                    }
+                                                });
+                                                Intent i = new Intent(LoginPage.this, MainActivity.class);
+                                                startActivity(i);
+                                                finish();
+                                            } else {
+                                                PD.dismiss();
+                                                // If sign in fails, display a message to the user.
+                                                Toast.makeText(LoginPage.this, "GAGAL", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                });
-                    } else {
-                        Toast.makeText(
-                                LoginPage.this,
-                                "Fill All Fields",
-                                Toast.LENGTH_LONG).show();
+                                    });
+                        } else {
+                            Toast.makeText(
+                                    LoginPage.this,
+                                    "Fill All Fields",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         });

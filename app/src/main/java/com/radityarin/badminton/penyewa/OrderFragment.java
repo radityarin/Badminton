@@ -40,6 +40,7 @@ public class OrderFragment extends Fragment implements RatingDialogListener {
     private boolean rating;
     private Sewa sewa;
     private double ratingPenyedia;
+    private double inputRate;
 
     public OrderFragment() {
     }
@@ -90,9 +91,9 @@ public class OrderFragment extends Fragment implements RatingDialogListener {
                 .setPositiveButtonText("Submit")
                 .setNegativeButtonText("Cancel")
                 .setNeutralButtonText("Later")
-                .setNoteDescriptions(Arrays.asList("Sangat Buruk","Buruk","Lumayan","Baik","Sangat Baik"))
+                .setNoteDescriptions(Arrays.asList("Sangat Buruk", "Buruk", "Lumayan", "Baik", "Sangat Baik"))
                 .setDefaultRating(2)
-                .setTitle("Beri rating dan komentar untuk "+namalapangan)
+                .setTitle("Beri rating dan komentar untuk " + namalapangan)
                 .setDescription("Pilih rating dan tulis komentar dibawah")
                 .setCommentInputEnabled(true)
                 .setStarColor(R.color.starColor)
@@ -122,23 +123,23 @@ public class OrderFragment extends Fragment implements RatingDialogListener {
     }
 
     @Override
-    public void onPositiveButtonClicked(int rate, String comment) {
+    public void onPositiveButtonClicked(final int rate, String comment) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference mDatabaseRef = database.getReference();
-        Rating rating = new Rating(sewa.getIdlapangan(),sewa.getNamalapangan(),sewa.getIdpenyewa(),sewa.getNamapenyewa(),sewa.getIdsewa(),String.valueOf(rate),comment);
+        final Rating rating = new Rating(sewa.getIdlapangan(), sewa.getNamalapangan(), sewa.getIdpenyewa(), sewa.getNamapenyewa(), sewa.getIdsewa(), String.valueOf((double) rate), comment);
         mDatabaseRef.child("Rating").child(sewa.getIdlapangan()).child(sewa.getIdsewa()).setValue(rating);
 
         FirebaseDatabase database2 = FirebaseDatabase.getInstance();
         final DatabaseReference myref = database2.getReference().child("Detail Sewa");
         myref.child(sewa.getIdsewa()).child("statussewa").setValue("Pesanan Selesai");
-
-
+        inputRate = (double) rate;
         DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference().child("Detail Penyedia").child(sewa.getIdlapangan());
         ratingRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Penyedia penyedia = dataSnapshot.getValue(Penyedia.class);
                 ratingPenyedia = penyedia.getRating();
+                Log.d("cek dari firebase", String.valueOf(ratingPenyedia));
             }
 
             @Override
@@ -146,12 +147,16 @@ public class OrderFragment extends Fragment implements RatingDialogListener {
 
             }
         });
-
-        FirebaseDatabase database3 = FirebaseDatabase.getInstance();
-        final DatabaseReference myref2 = database3.getReference().child("Detail Penyedia");
-        double finalRating = (ratingPenyedia + rate) /2d;
-        myref2.child(sewa.getIdlapangan()).child("rating").setValue(finalRating);
-
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(sewa != null) {
+            FirebaseDatabase database3 = FirebaseDatabase.getInstance();
+            final DatabaseReference myref2 = database3.getReference().child("Detail Penyedia");
+            double finalRating = (ratingPenyedia + inputRate) / 2d;
+            myref2.child(sewa.getIdlapangan()).child("rating").setValue(finalRating);
+        }
+    }
 }
