@@ -30,7 +30,6 @@ import com.stepstone.apprating.listener.RatingDialogListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 
 public class OrderFragment extends Fragment implements RatingDialogListener {

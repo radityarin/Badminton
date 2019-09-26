@@ -24,10 +24,6 @@ import com.radityarin.badminton.pojo.Sewa;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HistoryFragmentPenyedia extends Fragment {
 
     private ArrayList<Sewa> listsewa;
@@ -62,7 +58,7 @@ public class HistoryFragmentPenyedia extends Fragment {
                         listsewa.add(mSewa);
                     }
                 }
-                recyclerView.setAdapter(new AdapterOrder(listsewa, getContext(),true));
+                recyclerView.setAdapter(new AdapterOrder(listsewa, getContext(),false));
             }
 
             @Override

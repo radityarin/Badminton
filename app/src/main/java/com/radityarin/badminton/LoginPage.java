@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.radityarin.badminton.admin.MainAdminActivity;
 import com.radityarin.badminton.penyedia.MainPenyediaActivity;
 import com.radityarin.badminton.penyewa.MainActivity;
+import com.radityarin.badminton.penyewa.SignUpPage;
 
 import java.util.Objects;
 
@@ -49,6 +51,25 @@ public class LoginPage extends AppCompatActivity {
         inputPassword = findViewById(R.id.passwordlogin);
         Button btnMasuk = findViewById(R.id.buttonlogin);
         auth = FirebaseAuth.getInstance();
+
+        TextView tvlupapassword = findViewById(R.id.lupapassword);
+        tvlupapassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginPage.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btndaftar = findViewById(R.id.daftar);
+        btndaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginPage.this, SignUpPage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnMasuk.setOnClickListener(new View.OnClickListener() {
             @Override

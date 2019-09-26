@@ -71,7 +71,7 @@ public class ProfileFragmentPenyedia extends Fragment {
                 kordinat.setText(penyedia.getKordinatlapangan());
                 notelepon.setText(penyedia.getNotelepon());
                 if(!penyedia.getFotolapangan().equals("")) {
-                    String fotolapangan [] = penyedia.getFotolapangan().split(";");
+                    String[] fotolapangan = penyedia.getFotolapangan().split(";");
                     Picasso.get().load(fotolapangan[0]).into(ivurl);
                 } else {
                     Intent intent = new Intent(getContext(),SignUp2PenyediaPage.class);

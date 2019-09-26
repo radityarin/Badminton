@@ -61,7 +61,7 @@ public class TempatPage extends AppCompatActivity {
 
         tvrating.setText(penyedia.getRating()+" / 5");
 
-        String fasilitas[] = penyedia.getFasilitas().split(";");
+        String[] fasilitas = penyedia.getFasilitas().split(";");
         if (fasilitas[0].equals("false")) {
             tvparkiran.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_close_black_24dp, 0, 0, 0);
         }

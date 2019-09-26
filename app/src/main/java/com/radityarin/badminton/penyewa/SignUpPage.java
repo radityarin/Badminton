@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.radityarin.badminton.LandingPage;
+import com.radityarin.badminton.LoginPage;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.pojo.Profil;
 
@@ -48,6 +49,16 @@ public class SignUpPage extends AppCompatActivity {
         inputEmail = findViewById(R.id.email);
         inputNOHP = findViewById(R.id.noHp);
         inputPassword = findViewById(R.id.password);
+
+        Button btndaftar = findViewById(R.id.login);
+        btndaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUpPage.this, LoginPage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Button btnDaftar = findViewById(R.id.buttondaftar);
         btnDaftar.setOnClickListener(new View.OnClickListener() {

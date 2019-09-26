@@ -22,6 +22,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
+        <activity android:name=".ForgotPasswordActivity"></activity>
         <activity
             android:name=".admin.TempatPageAdmin"
             android:configChanges="orientation"
