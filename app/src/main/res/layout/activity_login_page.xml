@@ -95,4 +95,5 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp" />
     </LinearLayout>
+
 </RelativeLayout>

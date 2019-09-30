@@ -175,5 +175,6 @@
     <string name="nama_penyewa">Nama Penyewa</string>
     <string name="tony_stark">Tony Stark</string>
     <string name="lupa_passwords">Lupa Password</string>
+    <string name="reminder">Waktu bermain tinggal 10 menti</string>
 
 </resources>

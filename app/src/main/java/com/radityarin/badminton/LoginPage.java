@@ -29,7 +29,7 @@ import com.radityarin.badminton.penyewa.SignUpPage;
 
 import java.util.Objects;
 
-public class LoginPage extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity{
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressDialog PD;
@@ -189,4 +189,5 @@ public class LoginPage extends AppCompatActivity {
             }
         });
     }
+
 }
