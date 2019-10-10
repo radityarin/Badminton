@@ -90,7 +90,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".AlarmReceivers"
             android:enabled="true"
             android:exported="true"
             android:permission="" />

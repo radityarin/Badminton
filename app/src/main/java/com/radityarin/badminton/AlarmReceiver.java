@@ -1,5 +1,7 @@
 package com.radityarin.badminton;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,12 +17,11 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.radityarin.badminton.penyewa.MainActivity;
-
 import static com.radityarin.badminton.penyewa.MainActivity.EXTRA_MESSAGE;
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         String namalapangan = intent.getStringExtra(EXTRA_MESSAGE);
         showAlarmNotification(context, namalapangan, "Waktu sisa 10 menit", 1);
     }
@@ -67,4 +68,5 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 
     }
+
 }

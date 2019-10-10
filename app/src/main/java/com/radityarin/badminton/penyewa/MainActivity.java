@@ -21,9 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.radityarin.badminton.AlarmReceiver;
+import com.radityarin.badminton.AlarmReceivers;
 import com.radityarin.badminton.R;
-import com.radityarin.badminton.adapter.AdapterOrder;
 import com.radityarin.badminton.pojo.Sewa;
 
 import java.util.Calendar;
@@ -102,17 +101,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void showalarm(Sewa sewa){
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        Intent intent = new Intent(getApplicationContext(), AlarmReceivers.class);
         intent.putExtra(EXTRA_MESSAGE, sewa.getNamalapangan());
 
         String jam[] = sewa.getJamsewa().split(" - ");
         String jam2[] = jam[1].split(":");
+
         int jamnya = Integer.parseInt(jam2[0])-1;
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, jamnya);
