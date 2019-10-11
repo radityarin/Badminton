@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity"/>
         <activity
             android:name=".admin.TempatPageAdmin"
             android:configChanges="orientation"
@@ -90,7 +90,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <receiver
-            android:name=".AlarmReceivers"
+            android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="" />

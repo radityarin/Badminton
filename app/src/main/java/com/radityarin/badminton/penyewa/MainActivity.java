@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.radityarin.badminton.AlarmReceivers;
+import com.radityarin.badminton.AlarmReceiver;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.pojo.Sewa;
 
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showalarm(Sewa sewa){
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceivers.class);
+        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
         intent.putExtra(EXTRA_MESSAGE, sewa.getNamalapangan());
 
         String jam[] = sewa.getJamsewa().split(" - ");
