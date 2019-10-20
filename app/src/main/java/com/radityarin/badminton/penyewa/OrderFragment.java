@@ -30,6 +30,7 @@ import com.stepstone.apprating.listener.RatingDialogListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class OrderFragment extends Fragment implements RatingDialogListener {
@@ -106,7 +107,7 @@ public class OrderFragment extends Fragment implements RatingDialogListener {
                 .setWindowAnimation(R.style.MyDialogFadeAnimation)
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
-                .create(getActivity())
+                .create(Objects.requireNonNull(getActivity()))
                 .setTargetFragment(this, 0) // only if listener is implemented by fragment
                 .show();
     }
