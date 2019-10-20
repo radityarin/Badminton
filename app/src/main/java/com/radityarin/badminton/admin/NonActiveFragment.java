@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.radityarin.badminton.LandingPage;
+import com.radityarin.badminton.generalactivity.LandingPage;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.adapter.AdapterPenyediaAdmin;
 import com.radityarin.badminton.pojo.Penyedia;

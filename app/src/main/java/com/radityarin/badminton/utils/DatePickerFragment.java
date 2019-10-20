@@ -1,4 +1,4 @@
-package com.radityarin.badminton;
+package com.radityarin.badminton.utils;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

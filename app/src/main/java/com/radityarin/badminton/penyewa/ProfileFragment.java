@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.radityarin.badminton.LandingPage;
+import com.radityarin.badminton.generalactivity.LandingPage;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.pojo.Profil;
 import com.squareup.picasso.Picasso;

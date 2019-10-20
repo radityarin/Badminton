@@ -1,4 +1,4 @@
-package com.radityarin.badminton;
+package com.radityarin.badminton.generalactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.radityarin.badminton.R;
 import com.radityarin.badminton.penyedia.MainPenyediaActivity;
 import com.radityarin.badminton.penyedia.SignUpPenyediaPage;
 import com.radityarin.badminton.penyewa.MainActivity;

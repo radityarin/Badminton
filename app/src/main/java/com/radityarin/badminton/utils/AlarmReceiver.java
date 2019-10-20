@@ -1,4 +1,4 @@
-package com.radityarin.badminton;
+package com.radityarin.badminton.utils;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -10,18 +10,35 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.radityarin.badminton.R;
 import com.radityarin.badminton.penyewa.MainActivity;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+
+import static com.radityarin.badminton.penyewa.MainActivity.EXTRA_DATE;
+import static com.radityarin.badminton.penyewa.MainActivity.EXTRA_HOUR;
 import static com.radityarin.badminton.penyewa.MainActivity.EXTRA_MESSAGE;
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
+        int setHour = intent.getIntExtra(EXTRA_HOUR, -1);
+        String date = intent.getStringExtra(EXTRA_DATE);
+
+        Calendar rightNow = Calendar.getInstance();
+        String today = DateFormat.getDateInstance(DateFormat.FULL).format(rightNow.getTime());
+        int currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
         String namalapangan = intent.getStringExtra(EXTRA_MESSAGE);
-        showAlarmNotification(context, namalapangan, "Waktu sisa 10 menit", 1);
+
+        if(currentHour == setHour && date.equals(today)){
+            showAlarmNotification(context, namalapangan, "Waktu sisa 10 menit", 1);
+        }
     }
 
     private void showAlarmNotification(Context context, String title, String message, int notifId) {

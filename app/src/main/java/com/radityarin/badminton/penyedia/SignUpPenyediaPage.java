@@ -19,9 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.radityarin.badminton.LoginPage;
+import com.radityarin.badminton.generalactivity.LoginPage;
 import com.radityarin.badminton.R;
-import com.radityarin.badminton.LandingPage;
 import com.radityarin.badminton.pojo.Penyedia;
 
 import java.io.IOException;

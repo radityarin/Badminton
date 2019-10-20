@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
-        <activity android:name=".ForgotPasswordActivity"/>
+        <activity android:name=".generalactivity.ForgotPasswordActivity"/>
         <activity
             android:name=".admin.TempatPageAdmin"
             android:configChanges="orientation"
@@ -68,15 +68,15 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginPage"
+            android:name=".generalactivity.LoginPage"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LandingPage"
+            android:name=".generalactivity.LandingPage"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".generalactivity.SplashScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -90,7 +90,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".utils.AlarmReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="" />

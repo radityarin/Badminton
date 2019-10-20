@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.radityarin.badminton.AlarmReceiver;
+import com.radityarin.badminton.utils.AlarmReceiver;
 import com.radityarin.badminton.R;
 import com.radityarin.badminton.pojo.Sewa;
 
@@ -30,6 +31,8 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     public static final String EXTRA_MESSAGE = "message";
+    public static final String EXTRA_HOUR = "hour";
+    public static final String EXTRA_DATE = "date";
     private final static int ID_REMINDER = 100;
 
 
@@ -104,18 +107,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showalarm(Sewa sewa){
-        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        intent.putExtra(EXTRA_MESSAGE, sewa.getNamalapangan());
 
-        String jam[] = sewa.getJamsewa().split(" - ");
-        String jam2[] = jam[1].split(":");
+        String[] jam = sewa.getJamsewa().split(" - ");
+        String[] jam2 = jam[1].split(":");
 
         int jamnya = Integer.parseInt(jam2[0])-1;
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, jamnya);
         calendar.set(Calendar.MINUTE, 50);
         calendar.set(Calendar.SECOND, 0);
+
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        intent.putExtra(EXTRA_MESSAGE, sewa.getNamalapangan());
+        intent.putExtra(EXTRA_HOUR,jamnya);
+        intent.putExtra(EXTRA_DATE,sewa.getTglsewa());
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), ID_REMINDER, intent, 0);
         if (alarmManager != null) {
