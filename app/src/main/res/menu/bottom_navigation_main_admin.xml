@@ -5,12 +5,12 @@
         android:id="@+id/orderbutton"
         android:enabled="true"
         android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Pesanan"
+        android:title="Non Aktif"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/historybutton"
         android:enabled="true"
         android:icon="@drawable/ic_check_black_24dp"
-        android:title="Akun"
+        android:title="Aktif"
         app:showAsAction="ifRoom"/>
 </menu>
