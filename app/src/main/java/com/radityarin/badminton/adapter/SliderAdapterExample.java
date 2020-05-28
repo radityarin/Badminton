@@ -34,7 +34,6 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
 
     @Override
     public int getCount() {
-        //slider view count could be dynamic size
         return fotolapangan.length;
     }
 
@@ -42,7 +41,6 @@ public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample
 
         View itemView;
         ImageView imageViewBackground;
-        TextView textViewDescription;
 
         public SliderAdapterVH(View itemView) {
             super(itemView);

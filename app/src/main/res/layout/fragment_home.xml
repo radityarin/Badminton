@@ -35,6 +35,56 @@
                     android:textSize="32sp"
                     android:textStyle="bold" />
 
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/sv_lapangan"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_searchview"
+                android:paddingHorizontal="16dp"
+                android:text="Search here"
+                android:gravity="center_vertical"
+                android:drawablePadding="16dp"
+                android:textSize="16dp"
+                android:drawableLeft="@drawable/ic_search_grey_24dp"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@android:color/transparent"
+                android:queryHint="Search here"
+                tools:targetApi="o" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Terpopuler"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_lokasi_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                tools:targetApi="o">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Terdekat"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+
                 <Button
                     android:id="@+id/refreshbutton"
                     android:layout_width="32dp"
@@ -44,24 +94,12 @@
                     android:background="@drawable/ic_refresh_black_24dp" />
             </RelativeLayout>
 
-            <SearchView
-                android:id="@+id/sv_lapangan"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_searchview"
-                android:iconifiedByDefault="false"
-                android:queryBackground="@android:color/transparent"
-                android:queryHint="Search here"
-                tools:targetApi="o" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_lokasi"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp" />
-
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

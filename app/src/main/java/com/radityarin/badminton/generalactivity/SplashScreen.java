@@ -37,6 +37,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         }, 1500L);
     }
+
     @Override
     protected void onStart() {
         super.onStart();

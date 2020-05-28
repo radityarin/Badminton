@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -38,12 +41,13 @@ import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
-public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class HomeFragment extends Fragment {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private String kordinatuser;
     private Location userlocation;
     private RecyclerView recyclerView;
-    private ArrayList<Penyedia> listtempat;
+    private RecyclerView recyclerViewTerpopuler;
+    private ArrayList<Penyedia> listtempat, listtempatpopuler;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
 
@@ -61,12 +65,56 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         userlocation = new Location("");
         getCurrentLocation();
 
-        SearchView svlapangan = view.findViewById(R.id.sv_lapangan);
-        svlapangan.setOnQueryTextListener(this);
+        TextView svlapangan = view.findViewById(R.id.sv_lapangan);
+        svlapangan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new SearchFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_frame, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         recyclerView = view.findViewById(R.id.recycler_view_lokasi);
+        recyclerViewTerpopuler = view.findViewById(R.id.recycler_view_lokasi_horizontal);
         listtempat = new ArrayList<>();
+        listtempatpopuler = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Detail Penyedia");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listtempat.clear();
+                for (DataSnapshot dt : dataSnapshot.getChildren()) {
+                    Penyedia mLokasi = dt.getValue(Penyedia.class);
+                    if (mLokasi.isActive()) {
+                        listtempatpopuler.add(mLokasi);
+                    }
+                }
+
+                HashMap<Double, Penyedia> penyediaHashMap = new HashMap<>();
+                for (int i = 0; i < listtempatpopuler.size(); i++) {
+                    penyediaHashMap.put(listtempatpopuler.get(i).getRating(), listtempatpopuler.get(i));
+                }
+
+                ArrayList<Double> sortedkeys = new ArrayList<>(penyediaHashMap.keySet());
+                Collections.sort(sortedkeys, Collections.<Double>reverseOrder());
+                listtempatpopuler.clear();
+                for (Double key : sortedkeys) {
+                    listtempatpopuler.add(penyediaHashMap.get(key));
+                }
+                recyclerViewTerpopuler.setAdapter(new AdapterPenyedia(listtempatpopuler, getContext()));
+                recyclerViewTerpopuler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -128,7 +176,8 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                             Log.d("cek",a.getNamalapangan());
                         }
                         recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     }
 
                     @Override
@@ -173,34 +222,5 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        query = query.toLowerCase();
-        database.getReference().child("Detail Penyedia").orderByChild("namalapangansmallcase").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listtempat.clear();
-                for(DataSnapshot dt : dataSnapshot.getChildren()){
-                    Penyedia penyedia = dt.getValue(Penyedia.class);
-                    Log.d("cek", Objects.requireNonNull(penyedia).getNamalapangan());
-                    listtempat.add(penyedia);
-                }
-                recyclerView.setAdapter(new AdapterPenyedia(listtempat, getContext()));
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
     }
 }
