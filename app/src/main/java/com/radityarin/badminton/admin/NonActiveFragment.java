@@ -65,7 +65,7 @@ public class NonActiveFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
                     Penyedia mLokasi = dt.getValue(Penyedia.class);
-                    if (!Objects.requireNonNull(mLokasi).isActive()) {
+                    if (!Objects.requireNonNull(mLokasi).isActive() && !mLokasi.getFotolapangan().equals("")) {
                         penyedias.add(mLokasi);
                     }
                 }
